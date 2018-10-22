@@ -3,4 +3,4 @@ class Items {
 	
 }
 
-class AnilloDeDoran {}
+class AnilloDeDoran { }
