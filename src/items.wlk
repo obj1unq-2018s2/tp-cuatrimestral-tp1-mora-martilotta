@@ -27,7 +27,7 @@ class TomoAmplificador inherits Equipamiento {
 	
 	override method puntosDeVidaQueOtorga(campeon){ 
 		//Aporta el 25 % de los puntos de vida actuales del campeón
-		return campeon.puntosDeVida() * 25 / 100
+		return campeon.danioRecibido() * 25 / 100
 	}
 	
 	override method puntosDeAtaqueQueOtorga(campeon){
@@ -46,7 +46,7 @@ class TomoAmplificador inherits Equipamiento {
 		 * y los puntos de daño en 30 
 		 */
 		 
-		campeon.cantBloqueos(campeon.cantBloqueos() + 1)
+		campeon.cantBloqueos(campeon.cantBloqueos() - 1)
 		campeon.danioRecibido(campeon.danioRecibido() + 30)
     }
 }

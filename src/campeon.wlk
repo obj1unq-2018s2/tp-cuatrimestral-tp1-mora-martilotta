@@ -1,8 +1,8 @@
 class Campeon {
 	const property puntosDeAtaque
 	const property puntosDeVida
-	var property danioRecibido
-	var property cantBloqueos
+	var property danioRecibido = 0
+	var property cantBloqueos = 0
 	const property items = []
 	
 	method estaMuerto() = danioRecibido >= self.puntosDeVidaTotal()
@@ -15,12 +15,17 @@ class Campeon {
 		if (cantBloqueos > 0) {
 			cantBloqueos -= 1
 		} else {
-			danioRecibido += alguien.ataque()
+			danioRecibido += alguien.ataque() + alguien.plus()
 		}
 	}
 	method equipar(item) {
 		items.add(item)
 		item.equipar(self)
+	}
+	
+	method desequipar(item) {
+		items.remove(item)
+		item.desequipar(self)
 	}
 	
 	method puntosDeVidaExtra() = items.sum{item => item.puntosDeVidaQueOtorga(self)}
@@ -34,7 +39,7 @@ class Oleada {
 	var property ataque // cantMinions
 	var property plus
 	var property vida
-	var property danioRecibido
+	var property danioRecibido = 0
 	method recibirAtaque(alguien) {
 		danioRecibido += alguien.puntosDeAtaqueTotal()
 		self.atacar(alguien)
