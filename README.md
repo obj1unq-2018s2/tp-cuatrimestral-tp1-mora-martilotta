@@ -50,4 +50,4 @@ Realizar, como mínimo, el siguiente test:
 * Crear una Oleada de 10 minions con un plus de 5 puntos de daño.
 * Hacer que el campeón ataque a la oleada de minions tres veces.
 * Hacer que se desequipe el Tomo Amplificador y el Anillo.
-* Probar que el campeón esta muerto tras haberse desequipado el tomo. 
+* Probar que el campeón esta muerto tras haberse desequipado.
