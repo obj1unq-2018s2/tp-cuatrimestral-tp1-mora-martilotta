@@ -44,8 +44,7 @@ class TomoAmplificador inherits Equipamiento {
 		/* 
 		 * Los bloqueos del campeón se incrementan en una unidad, 
 		 * y los puntos de daño en 30 
-		 */
-		 
+		 */		 
 		campeon.cantBloqueos(1)
 		campeon.danioRecibido(30)
     }
@@ -75,7 +74,7 @@ class SombreroDeRabadon inherits TomoAmplificador {
 		 * el campeon recibe 5 puntos extra de danio.
 		 */
 		super(campeon) 
-		campeon.danioRecibido(campeon.danioRecibido() + 5)
+		campeon.danioRecibido(5)
 	}
 	
 	override method desequipar(campeon){

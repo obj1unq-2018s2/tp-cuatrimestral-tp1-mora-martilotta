@@ -2,13 +2,43 @@ import campeon.*
 import items.*
 
 describe "test general" {
+	
 	var goku   = new Campeon(puntosDeAtaque = 15, puntosDeVida = 50)
 	var anillo = new AnilloDeDoran()
 	var tomo   = new TomoAmplificador()
 	var oleada = new Oleada(ataque = 10, plus = 5, vida = 100)
 	var sombrero = new SombreroDeRabadon()
+	var lancelot_novato = new Campeon(puntosDeAtaque = 10, puntosDeVida = 20)
+	var lancelot = new Campeon(puntosDeAtaque = 40, puntosDeVida = 40)
 	
-	test "el campeon ataca y muere" {
+	//Variables para los test adicionales
+	
+	var gemaDelTiempo      = new AnilloDeDoran()
+	var gemaDelEspacio     = new AnilloDeDoran()
+	var gemaDeLaRealidad   = new AnilloDeDoran()
+	var gemaDeLaMente      = new AnilloDeDoran()
+	var gemaDelPoder       = new AnilloDeDoran()
+	var libroDeMagiaBlanca = new TomoAmplificador()
+	var libroDeMagiaNegra  = new TomoAmplificador()
+	var cascoAmplificador  = new SombreroDeRabadon()
+	
+	//Fixture para los test adicionales
+	
+	fixture {
+		lancelot.equiparseUn(gemaDelTiempo)
+		lancelot.equiparseUn(gemaDelEspacio)
+		lancelot.equiparseUn(gemaDeLaRealidad)
+		lancelot.equiparseUn(gemaDeLaMente)
+		lancelot.equiparseUn(gemaDelPoder)
+		lancelot.equiparseUn(libroDeMagiaBlanca)
+		lancelot.equiparseUn(libroDeMagiaNegra)
+		lancelot.equiparseUn(cascoAmplificador)
+	}
+	
+	
+	//PRIMER TEST
+	
+	test "Test del Enunciado: El campeón se equipa, ataca, y muere" {
 		goku.equiparseUn(anillo)
 		goku.equiparseUn(tomo)
 		goku.atacar(oleada)
@@ -20,15 +50,16 @@ describe "test general" {
 	//	assert.equals(50, goku.danioRecibido())
 		assert.that(goku.estaMuerto())
 	}
-	test "campeon se equipa un sombrero" {
+	
+	test "Test Estándar: el campeon se equipa un sombrero" {
 		
 		goku.equiparseUn(sombrero)
 		
-		assert.equals(56.25, goku.puntosDeVidaTotal())
-	    //Devuelve 56.25 porque el sombrero aporta 5 puntos de vida adicionales + 25% del tomo.
-		//Ver este assert si en realidad deberia dar 55
+		assert.equals(56.25, goku.puntosDeVidaTotales())
+	    /* Devuelve 56.25 : Los 5 puntos de vida adicionales que se otorgan
+	     * más 25% del danio total del campeón. (1,25) */
 		
-		assert.equals(45, goku.puntosDeAtaqueTotal())
+		assert.equals(45, goku.puntosDeAtaqueTotales())
 	    /* Devuelve 45 ya que suma 15 de ataque base + 30 unidades extra 
 	     * que aporta el sombrero */
 	     
@@ -38,4 +69,79 @@ describe "test general" {
 		assert.equals(5, goku.danioRecibido())
 		//El sombrero aporta 5 puntos de daño.
 	} 
+
+
+
+
+    test "Test Adicional: Auge y caida de Lancelot. La epopeya de un héroe"{
+	
+		/*
+		 * El objetivo de este test es contar la historia de Lancelot, 
+		 * un caballero valiente pero poco poderoso que intenta proteger
+		 * su pueblo de las oleadas de criaturas malvadas que lo aterrorizan.
+		 * En esta primer parte de su aventura, Lancelot se enfrenta a una horda
+		 * de duendes que lo dejan moribundo.
+		 */
+		
+		lancelot_novato.atacar(oleada)
+		assert.equals(lancelot_novato.danioRecibido(), 15)
+	}
+	
+	test "Lancelot consigue un poder cósmico"{
+		
+		/*
+		 * Lancelot, tras muchos años de entrenar y pelear duramente, logra
+		 * ser ungido como caballero. Pero a pesar de eso, él sigue buscando
+		 * un poder avasallador que le permita erradicar a los seres que asolan
+		 * su tierra.
+		 * Después de mucho investigar, encuentra en una cueva remota unas gemas
+		 * provenientes del espacio, que ensarza en anillos. Con la ayuda de ellas
+		 * y unos libros de magia que adquirió, se dispone a dar la pelea de su vida.
+		 */
+		 
+		 lancelot.atacar(oleada)
+		 lancelot.atacar(oleada)
+		 lancelot.atacar(oleada)
+		 lancelot.atacar(oleada)
+		 lancelot.atacar(oleada)
+		 lancelot.atacar(oleada)
+		 assert.notThat(lancelot.estaMuerto())
+	}
+	
+	test "El poder corrompió a Lancelot"{
+		/*
+		 * Después de derrotar a todas las criaturas, demonios y seres
+		 * malvados que aterrorizaban a su región y saler casi ileso, 
+		 * Lancelot se ve embriagado por su nueva fuerza. Empieza a reunir
+		 * adeptos y seguidoras que luego formarán un ejército.
+		 * Y con ayuda de éste Lancelot empieza a conquistar
+		 * territorios. Y no es para menos. Los niveles de vida y ataque
+		 * de Lancelot se elevaron a niveles superlativos, 
+		 * tal y como el test demuestra.
+		 */
+
+		assert.equals(lancelot.puntosDeVidaTotales(), 367.5)
+		assert.equals(lancelot.puntosDeAtaqueTotales(), 198)		
+	}
+	
+	
+	test "El poder destruyó al campeón"{
+		/*
+		 * Luego de conquistar reinos enteros con sus nuevos poderes,
+		 * lancelot perdió de vista sus valores y propósitos, consumido
+		 * como estaba por sus letales habilidades. Al ver cuanto daño había 
+		 * causado, decidió despojarse de todas sus posesiones, que acabaron
+		 * con su vida en el proceso.
+		 */
+		 
+		lancelot.desequiparseUn(gemaDelTiempo)
+		lancelot.desequiparseUn(gemaDelEspacio)
+		lancelot.desequiparseUn(gemaDeLaRealidad)
+		lancelot.desequiparseUn(gemaDeLaMente)
+		lancelot.desequiparseUn(gemaDelPoder)
+		lancelot.desequiparseUn(libroDeMagiaBlanca)
+		lancelot.desequiparseUn(libroDeMagiaNegra)
+		lancelot.desequiparseUn(cascoAmplificador)
+		assert.that(lancelot.estaMuerto())
+	}
 }

@@ -6,7 +6,7 @@ class Campeon {
 	var property cantBloqueos  = 0
 	const property items = []
 	
-	method estaMuerto() = danioRecibido >= self.puntosDeVidaTotal()
+	method estaMuerto() = danioRecibido >= self.puntosDeVidaTotales()
 	
 	
 	method danioRecibido(cantidad){
@@ -63,7 +63,7 @@ class Campeon {
 	method puntosDeVidaExtra() {
 		/*
 		 * Devuelve la suma de todos los puntos de vida extra 
-		 * que otorgan cada ítem equipado.
+		 * que otorga cada ítem equipado.
 		 */
 		return items.sum{item => item.puntosDeVidaQueOtorga(self)}
 	}
@@ -72,13 +72,13 @@ class Campeon {
 	method puntosDeAtaqueExtra() { 
 		/*
 		 * Devuelve la suma de todos los puntos de ataque extra
-		 * que otorgan cada ítem equipado.
+		 * que otorga cada ítem equipado.
 		 */
 		return items.sum{item => item.puntosDeAtaqueQueOtorga(self)}
 	}
 
 
-	method puntosDeVidaTotal() { 
+	method puntosDeVidaTotales() { 
 		/*
 		 * Devuelve la suma de los puntos de vida originales del campeón
 		 * más los puntos de vida extra.
@@ -87,7 +87,7 @@ class Campeon {
 	}
 	
 		
-	method puntosDeAtaqueTotal() {
+	method puntosDeAtaqueTotales() {
 		/*
 		 * Devuelve la suma de los puntos de ataque originales del campeón
 		 * más los puntos de ataque extra.
@@ -110,7 +110,7 @@ class Oleada {
 	
 	method recibirAtaque(alguien) {
 		//Se suma el ataque de alguien al danioRecibido.
-		danioRecibido += alguien.puntosDeAtaqueTotal()
+		danioRecibido += alguien.puntosDeAtaqueTotales()
 		self.atacar(alguien)
 	}
 	
