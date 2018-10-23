@@ -2,9 +2,9 @@ import campeon.*
 import items.*
 
 describe "test general" {
-	var goku = new Campeon(puntosDeAtaque = 15, puntosDeVida = 50)
+	var goku   = new Campeon(puntosDeAtaque = 15, puntosDeVida = 50)
 	var anillo = new AnilloDeDoran()
-	var tomo = new TomoAmplificador()
+	var tomo   = new TomoAmplificador()
 	var oleada = new Oleada(ataque = 10, plus = 5, vida = 100)
 	
 	test "el campeon ataca y muere" {

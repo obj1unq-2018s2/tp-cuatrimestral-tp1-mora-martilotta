@@ -14,12 +14,12 @@ class AnilloDeDoran inherits Equipamiento {
 
 	override method equipar(campeon){
 		//El campeón recibe 5 puntos de daño
-		campeon.danioRecibido(campeon.danioRecibido() + 5)
+		campeon.danioRecibido(5)
 	}
 	
 	override method desequipar(campeon){
 		//El campeón pierde 10 puntos de daño
-		campeon.danioRecibido(campeon.danioRecibido() - 10)
+		campeon.danioRecibido(-10)
 	}
 }
 
@@ -37,7 +37,7 @@ class TomoAmplificador inherits Equipamiento {
 	
 	override method equipar(campeon){
 		//Los bloqueos del campeón se incrementan en 2 unidades.
-		campeon.cantBloqueos(campeon.cantBloqueos() + 2)
+		campeon.cantBloqueos(2)
 	}
 	
 	override method desequipar(campeon){
@@ -46,8 +46,8 @@ class TomoAmplificador inherits Equipamiento {
 		 * y los puntos de daño en 30 
 		 */
 		 
-		campeon.cantBloqueos(campeon.cantBloqueos() + 1)
-		campeon.danioRecibido(campeon.danioRecibido() + 30)
+		campeon.cantBloqueos(1)
+		campeon.danioRecibido(30)
     }
 }
 
@@ -76,7 +76,7 @@ class SombreroDeRabadon inherits TomoAmplificador {
 		 * el añadido de incrementar los bloqueos del campeón en 5.
 		 */
 		super(campeon) 
-		campeon.cantBloqueos(campeon.cantBloqueos() + 5)
+		campeon.cantBloqueos(5)
 	}
 	
 	override method desequipar(campeon){
