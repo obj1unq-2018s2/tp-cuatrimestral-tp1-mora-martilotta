@@ -15,15 +15,15 @@ class Campeon {
 		if (cantBloqueos > 0) {
 			cantBloqueos -= 1
 		} else {
-			danioRecibido += alguien.ataque() + alguien.plus()
+			danioRecibido += alguien.ataqueTotal()
 		}
 	}
-	method equipar(item) {
+	method equiparseUn(item) {
 		items.add(item)
 		item.equipar(self)
 	}
 	
-	method desequipar(item) {
+	method desequiparseUn(item) {
 		items.remove(item)
 		item.desequipar(self)
 	}
@@ -44,6 +44,7 @@ class Oleada {
 		danioRecibido += alguien.puntosDeAtaqueTotal()
 		self.atacar(alguien)
 	}
+	method ataqueTotal() = ataque + plus
 	method atacar(alguien){
 		alguien.recibirAtaque(self)
 	}

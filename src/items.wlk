@@ -46,7 +46,7 @@ class TomoAmplificador inherits Equipamiento {
 		 * y los puntos de daño en 30 
 		 */
 		 
-		campeon.cantBloqueos(campeon.cantBloqueos() - 1)
+		campeon.cantBloqueos(campeon.cantBloqueos() + 1)
 		campeon.danioRecibido(campeon.danioRecibido() + 30)
     }
 }

@@ -8,15 +8,15 @@ describe "test general" {
 	var oleada = new Oleada(ataque = 10, plus = 5, vida = 100)
 	
 	test "el campeon ataca y muere" {
-		goku.equipar(anillo)
-		goku.equipar(tomo)
+		goku.equiparseUn(anillo)
+		goku.equiparseUn(tomo)
 		goku.atacar(oleada)
 		goku.atacar(oleada)
 		goku.atacar(oleada)
-		goku.desequipar(tomo)
-		goku.desequipar(anillo)
+		goku.desequiparseUn(tomo)
+		goku.desequiparseUn(anillo)
 	//	assert.equals(50, goku.puntosDeVidaTotal())
-		assert.equals(50, goku.danioRecibido())
-	//	assert.that(goku.estaMuerto())
+	//	assert.equals(50, goku.danioRecibido())
+		assert.that(goku.estaMuerto())
 	}
 }
