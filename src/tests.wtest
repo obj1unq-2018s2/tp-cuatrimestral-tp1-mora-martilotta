@@ -6,6 +6,7 @@ describe "test general" {
 	var anillo = new AnilloDeDoran()
 	var tomo = new TomoAmplificador()
 	var oleada = new Oleada(ataque = 10, plus = 5, vida = 100)
+	var sombrero = new SombreroDeRabadon()
 	
 	test "el campeon ataca y muere" {
 		goku.equiparseUn(anillo)
@@ -19,4 +20,12 @@ describe "test general" {
 	//	assert.equals(50, goku.danioRecibido())
 		assert.that(goku.estaMuerto())
 	}
+	test "campeon se equipa un sombrero" {
+		goku.equiparseUn(sombrero)
+	//	assert.equals(55, goku.puntosDeVidaTotal())
+	//  Checkear este test, deberia comportarse asi?
+		assert.equals(45, goku.puntosDeAtaqueTotal())
+		assert.equals(2, goku.cantBloqueos())
+		assert.equals(5, goku.danioRecibido())
+	} 
 }

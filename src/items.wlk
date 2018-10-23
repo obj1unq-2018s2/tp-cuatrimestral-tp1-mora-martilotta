@@ -64,10 +64,9 @@ class SombreroDeRabadon inherits TomoAmplificador {
 	
 	override method puntosDeAtaqueQueOtorga(campeon){
 		/*
-		 * Devuelve el doble de los puntos de ataque que el
-		 * Tomo Amplificador
+		 * Devuelve el doble de los puntos de ataque base del campeon
 		 */
-		return super(campeon) * 2
+		return campeon.puntosDeAtaque() * 2
 	}
 	
 	override method equipar(campeon){
@@ -76,7 +75,7 @@ class SombreroDeRabadon inherits TomoAmplificador {
 		 * el añadido de incrementar los bloqueos del campeón en 5.
 		 */
 		super(campeon) 
-		campeon.cantBloqueos(campeon.cantBloqueos() + 5)
+		campeon.danioRecibido(campeon.danioRecibido() + 5)
 	}
 	
 	override method desequipar(campeon){
