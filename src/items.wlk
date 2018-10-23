@@ -71,11 +71,11 @@ class SombreroDeRabadon inherits TomoAmplificador {
 	
 	override method equipar(campeon){
 		/*
-		 * Tiene los mismos efectos que el Tomo Amplificador más 
-		 * el añadido de incrementar los bloqueos del campeón en 5.
+		 * Tiene los mismos efectos que el Tomo Amplificador. Además 
+		 * el campeon recibe 5 puntos extra de danio.
 		 */
 		super(campeon) 
-		campeon.cantBloqueos(5)
+		campeon.danioRecibido(campeon.danioRecibido() + 5)
 	}
 	
 	override method desequipar(campeon){
