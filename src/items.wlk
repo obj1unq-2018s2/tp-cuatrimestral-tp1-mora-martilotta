@@ -26,7 +26,7 @@ class AnilloDeDoran inherits Equipamiento {
 class TomoAmplificador inherits Equipamiento {
 	
 	override method puntosDeVidaQueOtorga(campeon){ 
-		//Aporta el 25 % de los puntos de vida actuales del campeón
+		//Aporta el 25 % de los puntos de danioRecibido del campeón
 		return campeon.danioRecibido() * 25 / 100
 	}
 	
@@ -56,7 +56,7 @@ class SombreroDeRabadon inherits TomoAmplificador {
 	
 	override method puntosDeVidaQueOtorga(campeon){
 		/*
-		 * Devuelve los mismos puntos de vida que el Tomo Amplificador
+		 * Aporta los mismos puntos de vida que el Tomo Amplificador
 		 * más cinco unidades.
 		 */
 		return super(campeon) + 5
@@ -64,10 +64,9 @@ class SombreroDeRabadon inherits TomoAmplificador {
 	
 	override method puntosDeAtaqueQueOtorga(campeon){
 		/*
-		 * Devuelve el doble de los puntos de ataque que el
-		 * Tomo Amplificador
+		 * Aporta el doble de los puntos de ataque base del campeon
 		 */
-		return super(campeon) * 2
+		return campeon.puntosDeAtaque() * 2
 	}
 	
 	override method equipar(campeon){
