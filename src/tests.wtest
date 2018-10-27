@@ -6,7 +6,7 @@ describe "test general" {
 	var goku   = new Campeon(puntosDeAtaque = 15, puntosDeVida = 50)
 	var anillo = new AnilloDeDoran()
 	var tomo   = new TomoAmplificador()
-	var oleada = new Oleada(ataque = 10, plus = 25, vida = 100)
+	var oleada = new Oleada(puntosDeAtaque = 10, plus = 25, puntosDeVida = 100)
 	var sombrero = new SombreroDeRabadon()
 	var lancelot_novato = new Campeon(puntosDeAtaque = 10, puntosDeVida = 20)
 	var lancelot = new Campeon(puntosDeAtaque = 40, puntosDeVida = 40)

@@ -1,4 +1,4 @@
-class Equipamiento {
+class Item {
 	
 	method puntosDeVidaQueOtorga(campeon)
 	method puntosDeAtaqueQueOtorga(campeon)
@@ -7,23 +7,23 @@ class Equipamiento {
 }
 
 
-class AnilloDeDoran inherits Equipamiento {
+class AnilloDeDoran inherits Item {
 	
 	override method puntosDeVidaQueOtorga(campeon) = 60
 	override method puntosDeAtaqueQueOtorga(campeon) = 15
 
 	override method equipar(campeon){
 		//El campeón recibe 5 puntos de daño
-		campeon.danioRecibido(5)
+		campeon.esDaniadoCon(5)
 	}
 	
 	override method desequipar(campeon){
 		//El campeón pierde 10 puntos de daño
-		campeon.danioRecibido(-10)
+		campeon.esDaniadoCon(-10)
 	}
 }
 
-class TomoAmplificador inherits Equipamiento {
+class TomoAmplificador inherits Item {
 	
 	override method puntosDeVidaQueOtorga(campeon){ 
 		//Aporta el 25 % de los puntos de danioRecibido del campeón
@@ -46,7 +46,7 @@ class TomoAmplificador inherits Equipamiento {
 		 * y los puntos de daño en 30 
 		 */		 
 		campeon.cantBloqueos(1)
-		campeon.danioRecibido(30)
+		campeon.esDaniadoCon(30)
     }
 }
 
@@ -74,7 +74,7 @@ class SombreroDeRabadon inherits TomoAmplificador {
 		 * el campeon recibe 5 puntos extra de danio.
 		 */
 		super(campeon) 
-		campeon.danioRecibido(5)
+		campeon.esDaniadoCon(5)
 	}
 	
 	override method desequipar(campeon){
