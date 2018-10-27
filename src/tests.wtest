@@ -6,7 +6,7 @@ describe "test general" {
 	var goku   = new Campeon(puntosDeAtaque = 15, puntosDeVida = 50)
 	var anillo = new AnilloDeDoran()
 	var tomo   = new TomoAmplificador()
-	var oleada = new Oleada(ataque = 10, plus = 5, vida = 100)
+	var oleada = new Oleada(ataque = 10, plus = 25, vida = 100)
 	var sombrero = new SombreroDeRabadon()
 	var lancelot_novato = new Campeon(puntosDeAtaque = 10, puntosDeVida = 20)
 	var lancelot = new Campeon(puntosDeAtaque = 40, puntosDeVida = 40)
@@ -44,10 +44,11 @@ describe "test general" {
 		goku.atacar(oleada)
 		goku.atacar(oleada)
 		goku.atacar(oleada)
-		goku.desequiparseUn(tomo)
 		goku.desequiparseUn(anillo)
-	//	assert.equals(50, goku.puntosDeVidaTotal())
-	//	assert.equals(50, goku.danioRecibido())
+		goku.desequiparseUn(tomo)
+		assert.equals(50, goku.puntosDeVidaTotales())
+		assert.equals(60, goku.danioRecibido())
+		assert.equals(1, goku.cantBloqueos())
 		assert.that(goku.estaMuerto())
 	}
 	
@@ -84,7 +85,7 @@ describe "test general" {
 		 */
 		
 		lancelot_novato.atacar(oleada)
-		assert.equals(lancelot_novato.danioRecibido(), 15)
+		assert.equals(lancelot_novato.danioRecibido(), 35)
 	}
 	
 	test "Lancelot consigue un poder cósmico"{
