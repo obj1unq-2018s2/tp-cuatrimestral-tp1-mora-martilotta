@@ -51,3 +51,108 @@ Realizar, como mínimo, el siguiente test:
 * Hacer que el campeón ataque a la oleada de minions tres veces.
 * Hacer que se desequipe, primero el Tomo Amplificador, y después el Anillo.
 * Probar que el campeón esta muerto tras haberse desequipado ambos ítems.
+
+
+Parte 2:
+--------
+
+En esta segunda parte contemplaremos algunos agregados al dominio.
+
+Los campeones ahora poseen dinero. que al matar minions, gana dinero igual a la cantidad de minions eliminados. 
+Para que los campeones puedan equiparse objetos, estos deben ser comprados, por ende debe poseer el dinero necesario para poder comprar cada item.
+crear el metodo comprar(item) y vender(item).
+Al comprar un item, si tengo el dinero para comprarlo, gasto el dinero y me equipo el item.
+Al vender un item, gano la mitad del dinero de su coste y desequipo el item.
+
+Los minions ahora al recibir daño, estos reducen su cantidad de minions en una cantidad igual al daño recibido, asi hasta llegar a 0 en donde se los considera al escuadron muerto. Cuando un campeon ataca a un escuadron muerto, el campeon no recibe daño de ningun tipo ni dinero.
+
+Ahora, tras haber hecho estos cambios, El primer test fallara, debido a que ahora, en cada ataque, van muriendo minions. Modifique el test para que se vea reflejado el siguiente escenario:
+
+   * Crear un campeón con 50 puntos de vida y 15 de ataque.
+   * Hacer que se desequipe el Anillo de Doran.
+   * Hacer que se desequipe el Tomo Amplificador.
+   * Crear una oleada de 10 minions con un plus de 15 puntos de daño.
+   * Hacer que el campeón ataque a la oleada de minions tres veces.
+   * Hacer que se desequipe el Anillo de Doran.
+   * Hacer que se desequipe el Tomo Amplificador.
+   * Hacer que se equipe otro Tomo Amplificador
+   * Hacer que se desequipe el otro Tomo Amplificador
+   * Probar que el campeón esta muerto tras haberse desequipado.
+
+Los Objetos ahora poseen un precio, y una habilidad activa, una habilidad activa es una habilidad que se puede activar en cualquier momento:
+
+* Anillo de Doran: Cuesta 300, no posee habilidad activa.
+
+* Tomo Amplificador: Cuesta 500, su habilidad activa es la siguiente, si el campeon posee menos de 500 de dinero, automaticamente transforma su dinero en 500, solo puede ser usada una vez.
+
+* Sombrero de Rabadon: Cuesta 100 mas que un Tomo Amplificador.
+
+ademas, incluiremos un nuevo objeto: 
+
+Pocion de Vida: No aporta puntos de ataque ni vida, tiene coste 50. No hace nada al equiparse ni al desequiparse, y al activarse su habilidad activa, recupera 50 puntos y se desequipa inmediatamente el objeto del campeon, ya que fue esta fue consumida.
+
+
+Parte Individal:
+----------------
+
+IMPORTANTE: Cada Integrante del grupo debera elegir un tema, el enunciado esta pensado para grupos de a 3 integrantes. En caso de que existan grupos de menos de 3 integrantes, cada integrante solamente elegir un tema cada uno y dejar los que resten sin resolver.
+
+
+Campeon:
+--------
+
+Crear la clase Soporte, la cual es identica a cualquier otro campeon, con la particularidad de que se debe vincular a un capeon y ademas este puede cambiar de campeon vinculado cuando lo desee. Cada vez que que ataca, reduce en 10 puntos el daño total que posee el campeon. Ademas, cuenta con la particularidad de que comparte el inventario con el campeon al que se presta como soporte. Osea, que si por ejemplo el campeon al que esta vinculado, se equipa un anillo de doran, ambos tendran el anillo de doran equipado. Sin embargo no comparten el monto de dinero que poseen, por lo que para poder comprar un objeto, cada campeon depende del dinero que posee para hacerlo. (Considere usar el metodo inventario(), en vez de usar el atributo inventario en cada lugar que se use en la clase Campeon.)
+
+Crear el siguiente test:
+
+* Crear a Draven, un campeón con 150 puntos de vida y 25 de ataque y 1000 de dinero.
+* Crear a Darius, un campeón con 150 puntos de vida y 25 de ataque y 1000 de dinero.
+* Crear a Janna, una soporte con 150 puntos de vida y 25 de ataque y 100 de dinero.
+* Crear un ejercito de minions con 100 integrantes y 0 de plus de daño.
+* Que Janna vincule a Draven para ser su soporte.
+* Que el Draven ataque al ejercito de Minions.
+* Que el Janna ataque al ejercito de Minions.
+* Que Janna vincule a Darius para ser su soporte.
+* Que el Darius ataque al ejercito de Minions.
+* Que el Janna ataque al ejercito de Minions.
+* Que Darius compre un Tomo Amplificador.
+* Que Janna compre una pocion de vida.
+* Comprobar que la oleada de minions esta muerta.
+* Comprobar que el daño recibido por Draven es de 90, ya que Janna le reducio en 10 el daño total recibido.
+* Comprobar que el daño recibido por Darius es de 40, ya que Janna le reducio en 10 el daño total recibido.
+* Comprobar que Darius tiene 525 de dinero, por haber comprado el Tomo Amplificador.
+* Comprobar que Janna tiene 100 de dinero, por haber comprado una pocion de vida.
+* Comprobar que Janna tiene una pocion de vida en su inventario.
+* Comprobar que Janna tiene un Tomo Amplificador en su inventario.
+
+Objeto:
+------
+
+Crear el Baston del Vacio, a este objeto se le puede agregar objetos como materiales del baston en cualquier momento. Su coste es de 0, aporta la mitad de puntos de vida por elemento que tenga como materiales pero suma la totalidad de puntos en ataque. no posee ni habilidad al equiparse ni al desequiparse, pero su habilidad activa es igual a las habilidades activas de todos sus materiales.
+
+Crear el siguiente test:
+
+* Crear un campeón con 50 puntos de vida y 15 de ataque.
+* Equipar al campeón con dos anillos de doran distintos.
+* Crear un Baston del Vacio y agregar como materiales una pocion de vida y un Sombrero de Rabadon.
+* Equipar al campeón con el Baston del Vacio.
+* Activar la habilidad del Baston del vacio.
+* Comprobar que el campeon tiene 0 de daño recibido, producto de haberse recuperado los 10 puntos de daño provocados por los anillos,
+  gracias a la pocion de vida dentro del Baston del Vacio.
+* Comprobar que el campeon tiene 500 de dinero, gracias al Sombrero de Rabadon dentro del Baston del Vacio.
+
+Minions:
+--------
+
+Crear la clase Ejercito de minions, que es una especie de Oleada, pero que esta compuesta por muchas oleadas de Minions.
+Un ejercito de Minions esta muerto cuando todas sus oleadas estan muertas.
+Cuando un ejercito de Minions recibe daño, todas sus oleadas reciben daño, mismo que cuando una oleada de minions provoca daño, todas las oleadas le provocaran daño al campeon.
+
+Crear el siguiente test:
+
+* Crear un campeón con 50 puntos de vida y 20 de ataque.
+* Crear una oleada de Minions con 20 integrantes y un plus de daño de 5.
+* Crear otra oleada de Minions con 10 integrantes y un plus de daño de 15.
+* Crear un ejercito de Minions que contenga a las dos oleadas anteriormente creadas.
+* Que el campeon ataque al ejercito de Minions.
+* Comprobar que tanto el campeon como el Ejercito de Minions estan muertos.
