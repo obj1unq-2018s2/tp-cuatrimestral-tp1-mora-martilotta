@@ -58,15 +58,22 @@ Parte 2:
 
 En esta segunda parte contemplaremos algunos agregados al dominio.
 
-Los campeones ahora poseen dinero. que al matar minions, gana dinero igual a la cantidad de minions eliminados. 
-Para que los campeones puedan equiparse objetos, estos deben ser comprados, por ende debe poseer el dinero necesario para poder comprar cada item.
-crear el metodo comprar(item) y vender(item).
+### Las oleadas reciben daños
+En esta segunda etapa las oleadas de minions, al recibir daño, reduzca su cantidad de minions en un número igual al daño recibido.
+En caso de llegar a 0 el escuadrón se considera muerto. 
+Cuando un campeón ataca a un escuadron muerto no recibe daño de ningún tipo ni dinero.
+
+### Dinero
+En esta nueva etapa, cada campeón posee una cantidad de dinero y los items que se puede equipar tienen un precio.
+Entonces para que un campeón pueda equiparse un objeto, debe pagar el precio correspondiente.
+Agregar a los campeones los métodos `comprar(item)` y `vender(item)`.
 Al comprar un item, si tengo el dinero para comprarlo, gasto el dinero y me equipo el item.
-Al vender un item, gano la mitad del dinero de su coste y desequipo el item.
+Al vender un item, gano la mitad del dinero de su precio y desequipo el item.
+Además, al atacar a una oleada de minions, gana una cantidad de dinero igual a la cantidad de minions eliminados de la oleada.
 
-Los minions ahora al recibir daño, estos reducen su cantidad de minions en una cantidad igual al daño recibido, asi hasta llegar a 0 en donde se los considera al escuadron muerto. Cuando un campeon ataca a un escuadron muerto, el campeon no recibe daño de ningun tipo ni dinero.
-
-Ahora, tras haber hecho estos cambios, El primer test fallara, debido a que ahora, en cada ataque, van muriendo minions. Modifique el test para que se vea reflejado el siguiente escenario:
+### Actualización de los tests
+Tras haber hecho estos cambios el primer test fallara debido a que en cada ataque van muriendo minions. 
+Modifique el test para que se vea reflejado el siguiente escenario:
 
    * Crear un campeón con 50 puntos de vida y 15 de ataque.
    * Hacer que se desequipe el Anillo de Doran.
@@ -79,32 +86,39 @@ Ahora, tras haber hecho estos cambios, El primer test fallara, debido a que ahor
    * Hacer que se desequipe el otro Tomo Amplificador
    * Probar que el campeón esta muerto tras haberse desequipado.
 
-Los Objetos ahora poseen un precio, y una habilidad activa, una habilidad activa es una habilidad que se puede activar en cualquier momento:
+### Modificaciones a los items euqipables
+Además de precio, se pide agregar a los items equipables una habilidad _activable_, esto es, 
+una habilidad que se puede activar en cualquier momento, según la siguiente descripción:
 
-* Anillo de Doran: Cuesta 300, no posee habilidad activa.
+* **Anillo de Doran:** Cuesta 300, no posee habilidad activa.
 
-* Tomo Amplificador: Cuesta 500, su habilidad activa es la siguiente, si el campeon posee menos de 500 de dinero, automaticamente transforma su dinero en 500, solo puede ser usada una vez.
+* **Tomo Amplificador:** Cuesta 500 y su habilidad activa es la siguiente consiste en que, cuando el campeón posee menos de 500 de dinero, automáticamente transforma su dinero en 500. Sólo puede ser usada una vez.
 
-* Sombrero de Rabadon: Cuesta 100 mas que un Tomo Amplificador.
+* **Sombrero de Rabadon:** Cuesta 100 mas que un Tomo Amplificador.
 
-ademas, incluiremos un nuevo objeto: 
+También se pide agregar un nuevo objeto: 
 
-Pocion de Vida: No aporta puntos de ataque ni vida, tiene coste 50. No hace nada al equiparse ni al desequiparse, y al activarse su habilidad activa, recupera 50 puntos y se desequipa inmediatamente el objeto del campeon, ya que fue esta fue consumida.
-
+* **Pocion de Vida:** No aporta puntos de ataque ni vida, su precio es 50. No hace nada al equiparse ni al desequiparse. Al activarse su habilidad activa le descuenta 50 puntos de daño al campeón y se desequipa inmediatamente.
 
 Parte Individal:
 ----------------
 
-IMPORTANTE: Cada Integrante del grupo debera elegir un tema, el enunciado esta pensado para grupos de a 3 integrantes. En caso de que existan grupos de menos de 3 integrantes, cada integrante solamente elegir un tema cada uno y dejar los que resten sin resolver.
+> IMPORTANTE: A continuación se describen tres tareas. Cada integrante del grupo debera elegir una de ellas. Todos deberán continuar trabajando sobre el mismo repositorio, coordinando para que cada un pueda realizar su parte. En el momento de la entrega, obtendrán dos calificaciones, una grupal y la otra individual.
+>
+> En caso de que existan grupos de menos de 3 integrantes, cada integrante debe elegir sólo una tarea (y quedará una tarea sin resolver).
 
 
 Campeon:
 --------
 
-Crear la clase Soporte, la cual es identica a cualquier otro campeon, con la particularidad de que se debe vincular a un capeon y ademas este puede cambiar de campeon vinculado cuando lo desee. Cada vez que que ataca, reduce en 10 puntos el daño total que posee el campeon. Ademas, cuenta con la particularidad de que comparte el inventario con el campeon al que se presta como soporte. Osea, que si por ejemplo el campeon al que esta vinculado, se equipa un anillo de doran, ambos tendran el anillo de doran equipado. Sin embargo no comparten el monto de dinero que poseen, por lo que para poder comprar un objeto, cada campeon depende del dinero que posee para hacerlo. (Considere usar el metodo inventario(), en vez de usar el atributo inventario en cada lugar que se use en la clase Campeon.)
+Agregar los soportes. Un soporte se comporta de manera similar a un campeón pero no puede andar sólo, debe vincularse con un campeón, aunque puede cambiar de vínculo cuando lo desee.
+Cada vez que ataca, reduce en 10 puntos el daño total que posee el campeón. 
+Un soporte no tiene items propios y en cambio comparte el inventario con el campeón al que se presta como soporte. 
+Sin embargo no comparten el monto de dinero que poseen, por lo que para poder comprar un objeto, cada utiliza su propio para hacerlo. 
+
+> TIP: Considere usar el metodo inventario(), en vez de usar el atributo inventario en cada lugar que se use en la clase Campeon.
 
 Crear el siguiente test:
-
 * Crear a Draven, un campeón con 150 puntos de vida y 25 de ataque y 1000 de dinero.
 * Crear a Darius, un campeón con 150 puntos de vida y 25 de ataque y 1000 de dinero.
 * Crear a Janna, una soporte con 150 puntos de vida y 25 de ataque y 100 de dinero.
@@ -128,7 +142,13 @@ Crear el siguiente test:
 Objeto:
 ------
 
-Crear el Baston del Vacio, a este objeto se le puede agregar objetos como materiales del baston en cualquier momento. Su coste es de 0, aporta la mitad de puntos de vida por elemento que tenga como materiales pero suma la totalidad de puntos en ataque. no posee ni habilidad al equiparse ni al desequiparse, pero su habilidad activa es igual a las habilidades activas de todos sus materiales.
+Crear el objeto Baston del Vacio.
+A este objeto se le puede agregar objetos como materiales del baston en cualquier momento. 
+* Su precio es 0
+* Aporta la mitad de puntos de vida por elemento que tenga como materiales
+* Suma la totalidad de puntos en ataque
+* No tiene efecto al equiparse ni al desequiparse.
+* Su habilidad activable es igual a las habilidades activables de todos sus materiales.
 
 Crear el siguiente test:
 
@@ -144,7 +164,7 @@ Crear el siguiente test:
 Minions:
 --------
 
-Crear la clase Ejercito de minions, que es una especie de Oleada, pero que esta compuesta por muchas oleadas de Minions.
+Crear la clase Ejercito de minions, que tiene un comportamiento similar a una Oleada, pero que esta compuesta por muchas oleadas de Minions.
 Un ejercito de Minions esta muerto cuando todas sus oleadas estan muertas.
 Cuando un ejercito de Minions recibe daño, todas sus oleadas reciben daño, mismo que cuando una oleada de minions provoca daño, todas las oleadas le provocaran daño al campeon.
 
