@@ -1,10 +1,10 @@
 class Personaje {
+
 	/*
 	 * Consideramos que para esta primer etapa y probablemente para las proximas
 	 * estos atributos y metodos van a ser iguales para cualquier nuevo personaje.
 	 * Por este motivo lo modelamos como superclase
 	 */
-
 	const property puntosDeAtaque // Es un número.
 	const property puntosDeVida // Es un número.
 	var property danioRecibido = 0
@@ -21,7 +21,25 @@ class Personaje {
 		alguien.recibirAtaque(self)
 	}
 
-	method puntosDeVidaTotales()
+	method puntosDeAtaqueTotales() {
+		/*
+		 * Devuelve la suma de los puntos de ataque originales del personaje
+		 * más los puntos de ataque extra.
+		 */
+		return self.puntosDeAtaqueExtra() + puntosDeAtaque
+	}
+
+	method puntosDeVidaTotales() {
+		/*
+		 * Devuelve la suma de los puntos de vida originales del personaje
+		 * más los puntos de vida extra.
+		 */
+		return self.puntosDeVidaExtra() + puntosDeVida
+	}
+
+	method puntosDeAtaqueExtra()
+
+	method puntosDeVidaExtra()
 
 }
 
@@ -43,7 +61,7 @@ class Campeon inherits Personaje {
 		if (cantBloqueos > 0) {
 			cantBloqueos -= 1
 		} else {
-			danioRecibido += alguien.ataqueTotal()
+			danioRecibido += alguien.puntosDeAtaqueTotales()
 		}
 	}
 
@@ -65,7 +83,7 @@ class Campeon inherits Personaje {
 		item.desequipar(self)
 	}
 
-	method puntosDeVidaExtra() {
+	override method puntosDeVidaExtra() {
 		/*
 		 * Devuelve la suma de todos los puntos de vida extra 
 		 * que otorga cada ítem equipado.
@@ -73,28 +91,12 @@ class Campeon inherits Personaje {
 		return items.sum{ item => item.puntosDeVidaQueOtorga(self) }
 	}
 
-	method puntosDeAtaqueExtra() {
+	override method puntosDeAtaqueExtra() {
 		/*
 		 * Devuelve la suma de todos los puntos de ataque extra
 		 * que otorga cada ítem equipado.
 		 */
 		return items.sum{ item => item.puntosDeAtaqueQueOtorga(self) }
-	}
-
-	override method puntosDeVidaTotales() {
-		/*
-		 * Devuelve la suma de los puntos de vida originales del campeón
-		 * más los puntos de vida extra.
-		 */
-		return self.puntosDeVidaExtra() + puntosDeVida
-	}
-
-	method puntosDeAtaqueTotales() {
-		/*
-		 * Devuelve la suma de los puntos de ataque originales del campeón
-		 * más los puntos de ataque extra.
-		 */
-		return self.puntosDeAtaqueExtra() + puntosDeAtaque
 	}
 
 }
@@ -103,8 +105,6 @@ class Oleada inherits Personaje {
 
 	/*
 	 * Se crea una oleada de enemigos cuyo propósito es atacar al campeón.
-	 * Se le establece el valor de la vida, del ataque, y del ataque plus.
-	 * Esta oleada es susceptible de recibir ataques.
 	 */
 	var property plus // Es un número.
 
@@ -113,14 +113,15 @@ class Oleada inherits Personaje {
 		danioRecibido += alguien.puntosDeAtaqueTotales()
 		self.atacar(alguien)
 	}
-
-	method ataqueTotal() {
-		// Devuelve la suma del ataque más el ataque plus.
-		return puntosDeAtaque + plus
-	}
 	
-	override method puntosDeVidaTotales() {
-		return puntosDeVida
+	override method puntosDeAtaqueExtra() {
+		return plus
+	}
+
+	override method puntosDeVidaExtra() {
+		// La oleada no tiene puntos de vida extra
+		return 0
 	}
 
 }
+
