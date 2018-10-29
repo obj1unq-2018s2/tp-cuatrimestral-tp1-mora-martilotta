@@ -112,7 +112,7 @@ describe "test general" {
 	test "El poder corrompió a Lancelot"{
 		/*
 		 * Después de derrotar a todas las criaturas, demonios y seres
-		 * malvados que aterrorizaban a su región y saler casi ileso, 
+		 * malvados que aterrorizaban a su región y salir casi ileso, 
 		 * Lancelot se ve embriagado por su nueva fuerza. Empieza a reunir
 		 * adeptos y seguidoras que luego formarán un ejército.
 		 * Y con ayuda de éste Lancelot empieza a conquistar

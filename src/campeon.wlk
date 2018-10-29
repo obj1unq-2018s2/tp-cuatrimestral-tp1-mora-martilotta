@@ -1,15 +1,19 @@
 class Personaje {
-
+	
 	/*
 	 * Consideramos que para esta primer etapa y probablemente para las proximas
 	 * estos atributos y metodos van a ser iguales para cualquier nuevo personaje.
 	 * Por este motivo lo modelamos como superclase
 	 */
-	const property puntosDeAtaque // Es un número.
-	const property puntosDeVida // Es un número.
+	const property puntosDeAtaque = null // Es un número.
+	const property puntosDeVida = null // Es un número.
 	var property danioRecibido = 0
 
 	method estaMuerto() = danioRecibido >= self.puntosDeVidaTotales()
+		/*
+		 * Devuelve TRUE cuando el Personaje pierde la vida. Es decir,
+		 * cuando el daño recibido es mayor a los puntos de vida totales.
+		 */
 
 	method esDaniadoCon(cantidad) {
 		// Aumenta el valor danioRecibido en "cantidad" unidades.
@@ -98,10 +102,9 @@ class Campeon inherits Personaje {
 
 class Oleada inherits Personaje {
 
-	/*
-	 * Se crea una oleada de enemigos cuyo propósito es atacar al campeón.
-	 */
-	var property plus // Es un número.
+	// Se crea una oleada de enemigos cuyo propósito es atacar al campeón.
+	
+	var property plus = null // Es un número.
 
 	method recibirAtaque(alguien) {
 		// Se suma el ataque de alguien al danioRecibido.
@@ -110,7 +113,8 @@ class Oleada inherits Personaje {
 	}
 	
 	override method puntosDeAtaqueExtra() {
-		return plus
+		//Habilidad que solo posee la Oleada y que consiste en un daño adicional.
+		return plus 
 	}
 
 	override method puntosDeVidaExtra() {

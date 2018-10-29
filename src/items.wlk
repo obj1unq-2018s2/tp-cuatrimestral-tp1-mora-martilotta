@@ -1,4 +1,7 @@
-class Item {
+class Item {/*
+ * Incluye los métodos principales que un ítem debe poseer.
+ * (estos les asignaran sus propios valores de acuerdo a sus características).
+ */
 	
 	method puntosDeVidaQueOtorga(campeon)
 	method puntosDeAtaqueQueOtorga(campeon)
