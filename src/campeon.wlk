@@ -48,11 +48,6 @@ class Campeon inherits Personaje {
 	var property cantBloqueos = 0
 	const property items = []
 
-	method cantBloqueos(cantidad) {
-		// Aumenta los bloqueos en "cantidad" unidades.
-		cantBloqueos += cantidad
-	}
-
 	method recibirAtaque(alguien) {
 		/*
 		 * Si el campeón tiene algún bloqueo, éste se reduce en una unidad.
