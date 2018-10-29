@@ -5,8 +5,8 @@ class Item {/*
 	
 	method puntosDeVidaQueOtorga(campeon)
 	method puntosDeAtaqueQueOtorga(campeon) 
-	method equipar(campeon)	    {}
-	method desequipar(campeon)	{}
+	method equipar(campeon)	   
+	method desequipar(campeon)	
 }
 
 
