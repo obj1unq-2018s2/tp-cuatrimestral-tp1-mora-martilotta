@@ -61,7 +61,7 @@ En esta segunda parte contemplaremos algunos agregados al dominio.
 ### Las oleadas reciben daños
 En esta segunda etapa las oleadas de minions, al recibir daño, reduzca su cantidad de minions en un número igual al daño recibido.
 En caso de llegar a 0 el escuadrón se considera muerto. 
-Cuando un campeón ataca a un escuadron muerto no recibe daño de ningún tipo ni dinero.
+Cuando un campeón ataca a un escuadron muerto no recibe daño de ningún tipo ni dinero (ver manejo de dinero a continuación).
 
 ### Dinero
 En esta nueva etapa, cada campeón posee una cantidad de dinero y los items que se puede equipar tienen un precio.
@@ -86,35 +86,38 @@ Modifique el test para que se vea reflejado el siguiente escenario:
    * Hacer que se desequipe el otro Tomo Amplificador
    * Probar que el campeón esta muerto tras haberse desequipado.
 
-### Modificaciones a los items euqipables
+### Modificaciones a los items equipables
 Además de precio, se pide agregar a los items equipables una habilidad _activable_, esto es, 
 una habilidad que se puede activar en cualquier momento, según la siguiente descripción:
 
-* **Anillo de Doran:** Cuesta 300, no posee habilidad activa.
+* **Anillo de Doran:** Cuesta 300, no posee habilidad activable.
 
-* **Tomo Amplificador:** Cuesta 500 y su habilidad activa es la siguiente consiste en que, cuando el campeón posee menos de 500 de dinero, automáticamente transforma su dinero en 500. Sólo puede ser usada una vez.
+* **Tomo Amplificador:** Cuesta 500 y su habilidad activable consiste en que, cuando el campeón posee menos de 500 de dinero, automáticamente transforma su dinero en 500. Sólo puede ser usada una vez.
 
-* **Sombrero de Rabadon:** Cuesta 100 mas que un Tomo Amplificador.
+* **Sombrero de Rabadon:** Cuesta 100 más que un Tomo Amplificador, no posee habilidad activable.  
+	**¡OJO!** no vale poner "600", hay que poner "100 más que un (nuevo) Tomo Amplificador", de forma tal que si por alguna razón el precio del Tomo aumenta a 700, el del Sombrero aumente _automáticamente_ a 800.
 
 También se pide agregar un nuevo objeto: 
 
-* **Pocion de Vida:** No aporta puntos de ataque ni vida, su precio es 50. No hace nada al equiparse ni al desequiparse. Al activarse su habilidad activa le descuenta 50 puntos de daño al campeón y se desequipa inmediatamente.
+* **Pocion de Vida:** No aporta puntos de ataque ni vida, su precio es 50. No hace nada al equiparse ni al desequiparse. Su habilidad activa consiste en descontar 50 puntos de daño al campeón, y desequiparse inmediatamente.
 
-Parte Individal:
+
+
+Parte Individual:
 ----------------
 
-> IMPORTANTE: A continuación se describen tres tareas. Cada integrante del grupo debera elegir una de ellas. Todos deberán continuar trabajando sobre el mismo repositorio, coordinando para que cada un pueda realizar su parte. En el momento de la entrega, obtendrán dos calificaciones, una grupal y la otra individual.
+> IMPORTANTE: A continuación se describen tres tareas. Cada integrante del grupo debera elegir una de ellas. Todos deberán continuar trabajando sobre el mismo repositorio, coordinando para que cada une pueda realizar su parte. En el momento de la entrega, obtendrán dos calificaciones, una grupal y la otra individual.
 >
 > En caso de que existan grupos de menos de 3 integrantes, cada integrante debe elegir sólo una tarea (y quedará una tarea sin resolver).
 
 
-Campeon:
---------
+Soporte
+-------
 
-Agregar los soportes. Un soporte se comporta de manera similar a un campeón pero no puede andar sólo, debe vincularse con un campeón, aunque puede cambiar de vínculo cuando lo desee.
+Agregar los _soportes_. Un soporte se comporta de manera similar a un campeón pero no puede andar sólo, debe vincularse con un campeón, aunque puede cambiar de vínculo cuando lo desee.
 Cada vez que ataca, reduce en 10 puntos el daño total que posee el campeón. 
 Un soporte no tiene items propios y en cambio comparte el inventario con el campeón al que se presta como soporte. 
-Sin embargo no comparten el monto de dinero que poseen, por lo que para poder comprar un objeto, cada utiliza su propio para hacerlo. 
+Sin embargo no comparten el monto de dinero que poseen, por lo que para poder comprar un objeto, cada utiliza su propio dinero para hacerlo. 
 
 > TIP: Considere usar el metodo inventario(), en vez de usar el atributo inventario en cada lugar que se use en la clase Campeon.
 
@@ -139,11 +142,12 @@ Crear el siguiente test:
 * Comprobar que Janna tiene una pocion de vida en su inventario.
 * Comprobar que Janna tiene un Tomo Amplificador en su inventario.
 
-Objeto:
+
+Nuevo ítem: Bastón del Vacío
 ------
 
-Crear el objeto Baston del Vacio.
-A este objeto se le puede agregar objetos como materiales del baston en cualquier momento. 
+Crear el ítem Baston del Vacio.
+A este ítem se le puede agregar ítems como materiales del bastón en cualquier momento. 
 * Su precio es 0
 * Aporta la mitad de puntos de vida por elemento que tenga como materiales
 * Suma la totalidad de puntos en ataque
@@ -159,14 +163,15 @@ Crear el siguiente test:
 * Activar la habilidad del Baston del vacio.
 * Comprobar que el campeon tiene 0 de daño recibido, producto de haberse recuperado los 10 puntos de daño provocados por los anillos,
   gracias a la pocion de vida dentro del Baston del Vacio.
-* Comprobar que el campeon tiene 500 de dinero, gracias al Sombrero de Rabadon dentro del Baston del Vacio.
+* Comprobar que el campeón tiene 500 de dinero, gracias al Sombrero de Rabadon dentro del Baston del Vacio.
 
-Minions:
+
+Ejército de Minions:
 --------
 
 Crear la clase Ejercito de minions, que tiene un comportamiento similar a una Oleada, pero que esta compuesta por muchas oleadas de Minions.
 Un ejercito de Minions esta muerto cuando todas sus oleadas estan muertas.
-Cuando un ejercito de Minions recibe daño, todas sus oleadas reciben daño, mismo que cuando una oleada de minions provoca daño, todas las oleadas le provocaran daño al campeon.
+Cuando un ejército de Minions recibe daño, todas sus oleadas reciben el mismo daño; análogamente, cuando una oleada de minions provoca daño, todas las oleadas le provocaran el mismo daño al campeón que si atacaran por separado.
 
 Crear el siguiente test:
 
