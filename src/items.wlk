@@ -4,9 +4,9 @@ class Item {/*
  */
 	
 	method puntosDeVidaQueOtorga(campeon)
-	method puntosDeAtaqueQueOtorga(campeon)
-	method equipar(campeon)
-	method desequipar(campeon)	
+	method puntosDeAtaqueQueOtorga(campeon) 
+	method equipar(campeon)	    {}
+	method desequipar(campeon)	{}
 }
 
 
@@ -79,8 +79,5 @@ class SombreroDeRabadon inherits TomoAmplificador {
 		super(campeon) 
 		campeon.esDaniadoCon(5)
 	}
-	
-	override method desequipar(campeon){
-		//Este método no hace nada
-	}
+
 }

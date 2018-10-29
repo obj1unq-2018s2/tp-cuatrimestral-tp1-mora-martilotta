@@ -69,6 +69,11 @@ describe "test general" {
 		
 		assert.equals(5, goku.danioRecibido())
 		//El sombrero aporta 5 puntos de daño.
+		
+		goku.desequiparseUn(sombrero)
+		assert.equals(50, goku.puntosDeVidaTotales())
+		assert.equals(15, goku.puntosDeAtaqueTotales())
+		//Los puntos de vida y ataque vuelven a la normalidad
 	} 
 
 
