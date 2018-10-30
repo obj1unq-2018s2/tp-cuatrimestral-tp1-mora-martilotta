@@ -93,6 +93,22 @@ class Campeon {
 		items.remove(item)
 		item.desequipar(self)
 	}
+	
+	method comprar(item) {
+		if (self.puedeComprar(item)) {
+			self.equiparseUn(item)
+			dinero -= item.precio()
+		}
+	}
+	
+	method vender(item) {
+		self.desequiparseUn(item)
+		dinero += item.precio() / 2
+	}
+	
+	method puedeComprar(item) {
+		return dinero >= item.precio()
+	}
 
 }
 

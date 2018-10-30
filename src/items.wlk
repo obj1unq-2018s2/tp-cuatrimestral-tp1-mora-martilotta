@@ -7,6 +7,7 @@ class Item {/*
 	method puntosDeAtaqueQueOtorga(campeon) 
 	method equipar(campeon)	   
 	method desequipar(campeon)	
+	method precio()
 }
 
 
@@ -23,6 +24,10 @@ class AnilloDeDoran inherits Item {
 	override method desequipar(campeon){
 		//El campeón pierde 10 puntos de daño
 		campeon.esDaniadoCon(-10)
+	}
+	
+	override method precio() {
+		return 300
 	}
 }
 
@@ -51,6 +56,10 @@ class TomoAmplificador inherits Item {
 		campeon.cantBloqueos(1)
 		campeon.esDaniadoCon(30)
     }
+    
+    override method precio() {
+    	return 500
+    }
 }
 
 
@@ -78,6 +87,14 @@ class SombreroDeRabadon inherits TomoAmplificador {
 		 */
 		super(campeon) 
 		campeon.esDaniadoCon(5)
+	}
+	
+	override method desequipar(campeon) {
+		
+	}
+	
+	override method precio() {
+		return super() + 100
 	}
 
 }
