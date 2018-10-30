@@ -3,27 +3,24 @@ import items.*
 
 describe "test general" {
 	
-	var goku   = new Campeon(puntosDeAtaque = 15, puntosDeVida = 50, dinero =0)
+	var goku   = new Campeon(puntosDeAtaque = 15, puntosDeVida = 50, dinero =1000)
 	var anillo = new AnilloDeDoran()
 	var tomo   = new TomoAmplificador()
 	var oleada = new Oleada(minions = 10, plus = 25)
 
 	//PRIMER TEST
 	
-	test "Test del Enunciado: El campeón se equipa, ataca, y muere" {
-		goku.equiparseUn(anillo)
-		goku.equiparseUn(tomo)
+	test "Cambios en dinero de goku segun compras, ventas y ataques" {
+		goku.comprar(anillo)
+		goku.comprar(tomo)
+		assert.equals(200, goku.dinero())
 		goku.atacar(oleada)
-		assert.that(oleada.estaMuerto())
-		assert.equals(10, goku.dinero())
+		assert.equals(210, goku.dinero())
 		goku.atacar(oleada)
 		goku.atacar(oleada)
-		assert.equals(10, goku.dinero())
-		goku.desequiparseUn(anillo)
-		goku.desequiparseUn(tomo)
-		goku.equiparseUn(tomo)	
-		goku.desequiparseUn(tomo)	
-		assert.that(goku.estaMuerto())
+		assert.equals(210, goku.dinero())
+		goku.vender(anillo)
+		assert.equals(360, goku.dinero())
 	}
 	
 }
