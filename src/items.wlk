@@ -2,12 +2,13 @@ class Item {/*
  * Incluye los métodos principales que un ítem debe poseer.
  * (estos les asignaran sus propios valores de acuerdo a sus características).
  */
-	
+	var property usosHabilidadActivable
 	method puntosDeVidaQueOtorga(campeon)
 	method puntosDeAtaqueQueOtorga(campeon) 
 	method equipar(campeon)	   
 	method desequipar(campeon)	
 	method precio()
+	method habilidadActivable(campeon)
 }
 
 
@@ -60,6 +61,13 @@ class TomoAmplificador inherits Item {
     override method precio() {
     	return 500
     }
+    
+    override method habilidadActivable(campeon) {
+    	if (campeon.dinero() < 500 && usosHabilidadActivable < 1) {
+    		campeon.dinero(500)
+    		usosHabilidadActivable += 1
+    	}
+    }
 }
 
 
@@ -97,4 +105,17 @@ class SombreroDeRabadon inherits TomoAmplificador {
 		return super() + 100
 	}
 
+}
+
+class PocionDeVida inherits Item {
+	override method precio() {
+		return 50
+	}
+
+	override method habilidadActivable(campeon) {
+		if (usosHabilidadActivable < 2) {
+			campeon.recuperaDanioCon(50)
+			usosHabilidadActivable += 1
+		}
+	}
 }
