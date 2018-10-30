@@ -2,13 +2,17 @@ class Item {/*
  * Incluye los métodos principales que un ítem debe poseer.
  * (estos les asignaran sus propios valores de acuerdo a sus características).
  */
-	var property usosHabilidadActivable
+	var property usosHabilidadActivable = 0 // Es un número
+	var property valor = 0 // Es un número que indica el valor del producto, que sirve al método "precio"
 	method puntosDeVidaQueOtorga(campeon)
 	method puntosDeAtaqueQueOtorga(campeon) 
 	method equipar(campeon)	   
 	method desequipar(campeon)	
-	method precio()
+	
 	method habilidadActivable(campeon)
+	method usosHabilidad() //Permite modificar la vavriable usosHabilidadActivable de acuerdo al nro recibido.
+	method precio()
+	
 }
 
 
@@ -27,10 +31,20 @@ class AnilloDeDoran inherits Item {
 		campeon.esDaniadoCon(-10)
 	}
 	
+	// PARTE 2
+	
+	
 	override method precio() {
-		return 300
+		/*
+		 * Este método devuelve el valor del producto. Notar que si el valor del producto cambia, 
+		 * el precio también lo hará.
+		 */
+		valor = 300
+		return valor
 	}
 }
+
+
 
 class TomoAmplificador inherits Item {
 	
@@ -58,17 +72,29 @@ class TomoAmplificador inherits Item {
 		campeon.esDaniadoCon(30)
     }
     
-    override method precio() {
-    	return 500
-    }
+    // PARTE 2
+    
+	override method precio() {
+		/*
+		 * Este método devuelve el valor del producto. Notar que si el valor del producto cambia, 
+		 * el precio también lo hará.
+		 */
+		valor = 500
+		return valor
+	}
+	
+	override method usosHabilidad(){
+		usosHabilidadActivable = 1
+	}
     
     override method habilidadActivable(campeon) {
     	if (campeon.dinero() < 500 && usosHabilidadActivable < 1) {
     		campeon.dinero(500)
-    		usosHabilidadActivable += 1
+    		usosHabilidadActivable -= 1
     	}
     }
 }
+
 
 
 class SombreroDeRabadon inherits TomoAmplificador {
@@ -101,18 +127,36 @@ class SombreroDeRabadon inherits TomoAmplificador {
 		
 	}
 	
+	// PARTE 2
+	
 	override method precio() {
+		// Devuelve el mismo precio que el tomo más 100 de valor agregado.
 		return super() + 100
 	}
-
+	
+	override method usosHabilidad(){
+		// No hace nada, ya que el sombrero no tiene habilidadActivable
+	}
+	
+	override method habilidadActivable(campeon) {
+		// No hace nada, ya que el sombrero no tiene habilidad activable.
+	}
 }
 
+
+
+
 class PocionDeVida inherits Item {
+	
 	override method precio() {
-		return 50
+		valor = 50
+		return valor
 	}
+	
+	override method usosHabilidad() = 2
 
 	override method habilidadActivable(campeon) {
+		
 		if (usosHabilidadActivable < 2) {
 			campeon.recuperaDanioCon(50)
 			usosHabilidadActivable += 1
