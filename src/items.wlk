@@ -35,7 +35,7 @@ class AnilloDeDoran inherits Item {
 
 	override method desequipar(campeon) {
 		// El campeón pierde 10 puntos de daño
-		campeon.esDaniadoCon(-10)
+		campeon.recuperaDanioCon(10)
 	}
 
 	// PARTE 2
