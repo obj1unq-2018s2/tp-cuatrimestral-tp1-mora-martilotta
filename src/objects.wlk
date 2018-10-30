@@ -28,7 +28,7 @@ class Campeon {
 
 	method atacar(alguien) {
 		// Se ataca a alguien y se aplican los métodos correspondientes.
-		dinero += self.puntosDeAtaqueTotales().max(alguien.minions()) // ver
+		dinero += self.puntosDeAtaqueTotales().min(alguien.minions()) // ver
 		alguien.recibirAtaque(self)
 	}
 
@@ -100,7 +100,16 @@ class Oleada {
 
 	// Se crea una oleada de enemigos cuyo propósito es atacar al campeón.
 	var property plus = null // Es un número.
-	var property minions
+	
+	var minions
+	
+	method minions(cuantos) {
+		minions += cuantos
+	}
+	
+	method minions() {
+		return minions.max(0)
+	}
 
 	method recibirAtaque(alguien) {
 		self.esDaniadoCon(alguien.puntosDeAtaqueTotales())
