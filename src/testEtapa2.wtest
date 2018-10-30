@@ -1,4 +1,4 @@
-import objects.*
+import campeon.*
 import items.*
 
 describe "test general" {

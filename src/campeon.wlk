@@ -1,27 +1,32 @@
-class Personaje {
-	
-	/*
-	 * Consideramos que para esta primer etapa y probablemente para las proximas
-	 * estos atributos y metodos van a ser iguales para cualquier nuevo personaje.
-	 * Por este motivo lo modelamos como superclase
-	 */
+class Campeon {
+
 	const property puntosDeAtaque = null // Es un número.
 	const property puntosDeVida = null // Es un número.
 	var property danioRecibido = 0
+	var property cantBloqueos = 0
+	const property items = []
+	var property dinero = 0
 
-	method estaMuerto() = danioRecibido >= self.puntosDeVidaTotales()
+	method estaMuerto() {
 		/*
 		 * Devuelve TRUE cuando el Personaje pierde la vida. Es decir,
 		 * cuando el daño recibido es mayor a los puntos de vida totales.
 		 */
+		return danioRecibido >= self.puntosDeVidaTotales()
+	}
 
 	method esDaniadoCon(cantidad) {
 		// Aumenta el valor danioRecibido en "cantidad" unidades.
 		danioRecibido += cantidad
 	}
 
+	method recuperaDanioCon(cantidad) {
+		danioRecibido -= cantidad
+	}
+
 	method atacar(alguien) {
 		// Se ataca a alguien y se aplican los métodos correspondientes.
+		dinero += self.puntosDeAtaqueTotales().min(alguien.minions())
 		alguien.recibirAtaque(self)
 	}
 
@@ -41,16 +46,21 @@ class Personaje {
 		return self.puntosDeVidaExtra() + puntosDeVida
 	}
 
-	method puntosDeAtaqueExtra()
+	method puntosDeVidaExtra() {
+		/*
+		 * Devuelve la suma de todos los puntos de vida extra 
+		 * que otorga cada ítem equipado.
+		 */
+		return items.sum{ item => item.puntosDeVidaQueOtorga(self) }
+	}
 
-	method puntosDeVidaExtra()
-
-}
-
-class Campeon inherits Personaje {
-
-	var property cantBloqueos = 0
-	const property items = []
+	method puntosDeAtaqueExtra() {
+		/*
+		 * Devuelve la suma de todos los puntos de ataque extra
+		 * que otorga cada ítem equipado.
+		 */
+		return items.sum{ item => item.puntosDeAtaqueQueOtorga(self) }
+	}
 
 	method recibirAtaque(alguien) {
 		/*
@@ -82,45 +92,60 @@ class Campeon inherits Personaje {
 		item.desequipar(self)
 	}
 
-	override method puntosDeVidaExtra() {
-		/*
-		 * Devuelve la suma de todos los puntos de vida extra 
-		 * que otorga cada ítem equipado.
-		 */
-		return items.sum{ item => item.puntosDeVidaQueOtorga(self) }
+	method comprar(item) {
+		if (self.puedeComprar(item)) {
+			self.equiparseUn(item)
+			dinero -= item.precio()
+		}
 	}
 
-	override method puntosDeAtaqueExtra() {
-		/*
-		 * Devuelve la suma de todos los puntos de ataque extra
-		 * que otorga cada ítem equipado.
-		 */
-		return items.sum{ item => item.puntosDeAtaqueQueOtorga(self) }
+	method vender(item) {
+		self.desequiparseUn(item)
+		dinero += item.precio() / 2
+	}
+
+	method puedeComprar(item) {
+		return dinero >= item.precio()
 	}
 
 }
 
-class Oleada inherits Personaje {
+class Oleada {
 
 	// Se crea una oleada de enemigos cuyo propósito es atacar al campeón.
-	
 	var property plus = null // Es un número.
+	var minions
+
+	method minions(cuantos) {
+		minions = cuantos
+	}
+
+	method minions() {
+		return minions.max(0)
+	}
 
 	method recibirAtaque(alguien) {
-		// Se suma el ataque de alguien al danioRecibido.
-		danioRecibido += alguien.puntosDeAtaqueTotales()
-		self.atacar(alguien)
-	}
-	
-	override method puntosDeAtaqueExtra() {
-		//Habilidad que solo posee la Oleada y que consiste en un daño adicional.
-		return plus 
+		self.esDaniadoCon(alguien.puntosDeAtaqueTotales())
+		if (!self.estaMuerto()) {
+			alguien.esDaniadoCon(self.puntosDeAtaqueTotales())
+		}
 	}
 
-	override method puntosDeVidaExtra() {
-		// La oleada no tiene puntos de vida extra
-		return 0
+	method esDaniadoCon(cantidad) {
+		minions -= cantidad
+	}
+
+	method estaMuerto() {
+		return minions <= 0
+	}
+
+	method puntosDeAtaqueTotales() {
+		return minions + plus
+	}
+
+	method puntosDeAtaqueExtra() {
+		// Habilidad que solo posee la Oleada y que consiste en un daño adicional.
+		return plus
 	}
 
 }
-
