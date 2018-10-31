@@ -14,9 +14,7 @@ class Item {
 
 	method desequipar(campeon)
 
-	method habilidadActivable(campeon)
-
-	method usosPermitidos() // Permite modificar la vavriable usos de acuerdo al nro recibido.
+	method habilidadActivable(campeon) {}
 
 	method precio()
 
@@ -76,7 +74,7 @@ class TomoAmplificador inherits Item {
 		return 500
 	}
 
-	override method usosPermitidos() {
+	method usosPermitidos() {
 		return 1
 	}
 
@@ -132,7 +130,7 @@ class PocionDeVida inherits Item {
 		return 50
 	}
 
-	override method usosPermitidos() = 2
+	method usosPermitidos() = 2
 
 	override method habilidadActivable(campeon) {
 		if (usos < self.usosPermitidos()) {
