@@ -3,11 +3,7 @@ import items.*
 
 describe "test general" {
 	
-	var goku   = new Campeon(puntosDeAtaque = 15, puntosDeVida = 50)
-	var anillo = new AnilloDeDoran()
-	var tomo   = new TomoAmplificador()
-	var oleada = new Oleada(puntosDeAtaque = 10, plus = 25, puntosDeVida = 100)
-	var sombrero = new SombreroDeRabadon()
+	var oleada = new Oleada(minions = 10, plus = 25)
 	var lancelot_novato = new Campeon(puntosDeAtaque = 10, puntosDeVida = 20)
 	var lancelot = new Campeon(puntosDeAtaque = 40, puntosDeVida = 40)
 	
@@ -38,47 +34,6 @@ describe "test general" {
 	
 	//PRIMER TEST
 	
-	test "Test del Enunciado: El campeón se equipa, ataca, y muere" {
-		goku.equiparseUn(anillo)
-		goku.equiparseUn(tomo)
-		goku.atacar(oleada)
-		goku.atacar(oleada)
-		goku.atacar(oleada)
-		goku.desequiparseUn(anillo)
-		goku.desequiparseUn(tomo)
-		assert.equals(50, goku.puntosDeVidaTotales())
-		assert.equals(60, goku.danioRecibido())
-		assert.equals(1, goku.cantBloqueos())
-		assert.that(goku.estaMuerto())
-	}
-	
-	test "Test Estándar: el campeon se equipa un sombrero" {
-		
-		goku.equiparseUn(sombrero)
-		
-		assert.equals(56.25, goku.puntosDeVidaTotales())
-	    /* Devuelve 56.25 : Los 5 puntos de vida adicionales que se otorgan
-	     * más 25% del danio total del campeón. (1,25) */
-		
-		assert.equals(45, goku.puntosDeAtaqueTotales())
-	    /* Devuelve 45 ya que suma 15 de ataque base + 30 unidades extra 
-	     * que aporta el sombrero */
-	     
-		assert.equals(2, goku.cantBloqueos())
-		//Aporta los mismos bloqueos que el tomo.
-		
-		assert.equals(5, goku.danioRecibido())
-		//El sombrero aporta 5 puntos de daño.
-		
-		goku.desequiparseUn(sombrero)
-		assert.equals(50, goku.puntosDeVidaTotales())
-		assert.equals(15, goku.puntosDeAtaqueTotales())
-		//Los puntos de vida y ataque vuelven a la normalidad
-	} 
-
-
-
-
     test "Test Adicional: Auge y caida de Lancelot. La epopeya de un héroe"{
 	
 		/*
@@ -90,7 +45,7 @@ describe "test general" {
 		 */
 		
 		lancelot_novato.atacar(oleada)
-		assert.equals(lancelot_novato.danioRecibido(), 35)
+		assert.equals(lancelot_novato.danioRecibido(), 0)
 	}
 	
 	test "Lancelot consigue un poder cósmico"{

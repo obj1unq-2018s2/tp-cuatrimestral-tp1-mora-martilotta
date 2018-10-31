@@ -7,7 +7,6 @@ describe "test general" {
 	var anillo = new AnilloDeDoran()
 	var tomo   = new TomoAmplificador()
 	var oleada = new Oleada(minions = 10, plus = 25)
-	var sombrero = new SombreroDeRabadon()
 
 	//PRIMER TEST
 	
@@ -22,9 +21,6 @@ describe "test general" {
 		goku.desequiparseUn(tomo)
 		goku.equiparseUn(tomo)	
 		goku.desequiparseUn(tomo)	
-//		assert.equals(50, goku.puntosDeVidaTotales())
-//		assert.equals(60, goku.danioRecibido())
-//		assert.equals(1, goku.cantBloqueos())
 		assert.that(goku.estaMuerto())
 	}
 	
