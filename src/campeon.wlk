@@ -21,11 +21,7 @@ class Campeon {
 	}
 
 	method recuperaDanioCon(cantidad) {
-		if (danioRecibido > cantidad) {
-			danioRecibido -= cantidad
-		} else {
-			danioRecibido = 0
-		}
+		danioRecibido = (danioRecibido - cantidad).max(0)
 	}
 
 	method atacar(alguien) {
@@ -33,7 +29,7 @@ class Campeon {
 		dinero += self.dineroObtenidoPorAtaque(alguien)
 		alguien.recibirAtaque(self)
 	}
-	
+
 	method dineroObtenidoPorAtaque(alguien) {
 		return self.puntosDeAtaqueTotales().min(alguien.minions())
 	}
@@ -108,7 +104,7 @@ class Campeon {
 			self.error("Te faltan " + self.dineroFaltanteParaComprar(item) + " para comprar este item!")
 		}
 	}
-	
+
 	method dineroFaltanteParaComprar(item) {
 		return item.precio() - dinero
 	}
@@ -128,15 +124,7 @@ class Oleada {
 
 	// Se crea una oleada de enemigos cuyo propósito es atacar al campeón.
 	var property plus = null // Es un número.
-	var minions
-
-	method minions(cuantos) {
-		minions = cuantos
-	}
-
-	method minions() {
-		return minions.max(0)
-	}
+	var property minions
 
 	method recibirAtaque(alguien) {
 		self.esDaniadoCon(alguien.puntosDeAtaqueTotales())
@@ -146,7 +134,7 @@ class Oleada {
 	}
 
 	method esDaniadoCon(cantidad) {
-		minions -= cantidad
+		minions = (minions - cantidad).max(0)
 	}
 
 	method estaMuerto() {
@@ -163,3 +151,4 @@ class Oleada {
 	}
 
 }
+

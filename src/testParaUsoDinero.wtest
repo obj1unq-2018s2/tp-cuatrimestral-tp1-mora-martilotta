@@ -2,14 +2,14 @@ import campeon.*
 import items.*
 
 describe "test general" {
-	
-	var goku   = new Campeon(puntosDeAtaque = 15, puntosDeVida = 50, dinero =1000)
-	var anillo = new AnilloDeDoran()
-	var tomo   = new TomoAmplificador()
-	var oleada = new Oleada(minions = 10, plus = 25)
 
-	//PRIMER TEST
-	
+	var goku = new Campeon(puntosDeAtaque = 15, puntosDeVida = 50, dinero = 1000)
+	var anillo = new AnilloDeDoran()
+	var tomo = new TomoAmplificador()
+	var oleada = new Oleada(minions = 10, plus = 25)
+	var oleada2 = new Oleada(minions = 50, plus = 25)
+
+	// PRIMER TEST
 	test "Cambios en dinero de goku segun compras, ventas y ataques" {
 		goku.comprar(anillo)
 		goku.comprar(tomo)
@@ -21,8 +21,28 @@ describe "test general" {
 		assert.equals(210, goku.dinero())
 		goku.vender(anillo)
 		assert.equals(360, goku.dinero())
-		assert.throwsExceptionWithMessage("Te faltan 140 para comprar este item!", {goku.comprar(tomo)})
+		assert.throwsExceptionWithMessage("Te faltan 140 para comprar este item!", { goku.comprar(tomo)})
 		assert.equals(360, goku.dinero())
 	}
-	
+
+	test "Comportamiento de puntos de ataque y danioRecibido de goku segun ataques" {
+		assert.equals(15, goku.puntosDeAtaqueTotales())
+		assert.equals(50, goku.puntosDeVidaTotales())
+		assert.equals(75, oleada2.puntosDeAtaqueTotales())
+		assert.equals(0, goku.danioRecibido())
+		goku.comprar(anillo)
+		assert.equals(5, goku.danioRecibido())
+		assert.equals(30, goku.puntosDeAtaqueTotales())
+		assert.equals(110, goku.puntosDeVidaTotales())
+		goku.atacar(oleada2)
+		assert.equals(20, oleada2.minions())
+		assert.equals(50, goku.danioRecibido())
+		goku.atacar(oleada2)
+		assert.equals(0, oleada2.minions())
+		assert.equals(50, goku.danioRecibido())
+		assert.notThat(goku.estaMuerto())
+		assert.that(oleada2.estaMuerto())
+	}
+
 }
+
