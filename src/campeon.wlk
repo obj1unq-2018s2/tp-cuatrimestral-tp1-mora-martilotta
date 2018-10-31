@@ -93,9 +93,12 @@ class Campeon {
 	}
 
 	method comprar(item) {
+		var dineroFaltante = item.precio() - dinero
 		if (self.puedeComprar(item)) {
 			self.equiparseUn(item)
 			dinero -= item.precio()
+		} else {
+			self.error("Te faltan " + dineroFaltante + " para comprar este item!")
 		}
 	}
 
