@@ -21,13 +21,21 @@ class Campeon {
 	}
 
 	method recuperaDanioCon(cantidad) {
-		danioRecibido -= cantidad
+		if (danioRecibido > cantidad) {
+			danioRecibido -= cantidad
+		} else {
+			danioRecibido = 0
+		}
 	}
 
 	method atacar(alguien) {
 		// Se ataca a alguien y se aplican los métodos correspondientes.
-		dinero += self.puntosDeAtaqueTotales().min(alguien.minions())
+		dinero += self.dineroObtenidoPorAtaque(alguien)
 		alguien.recibirAtaque(self)
+	}
+	
+	method dineroObtenidoPorAtaque(alguien) {
+		return self.puntosDeAtaqueTotales().min(alguien.minions())
 	}
 
 	method puntosDeAtaqueTotales() {
@@ -93,13 +101,16 @@ class Campeon {
 	}
 
 	method comprar(item) {
-		var dineroFaltante = item.precio() - dinero
 		if (self.puedeComprar(item)) {
 			self.equiparseUn(item)
 			dinero -= item.precio()
 		} else {
-			self.error("Te faltan " + dineroFaltante + " para comprar este item!")
+			self.error("Te faltan " + self.dineroFaltanteParaComprar(item) + " para comprar este item!")
 		}
+	}
+	
+	method dineroFaltanteParaComprar(item) {
+		return item.precio() - dinero
 	}
 
 	method vender(item) {
@@ -130,7 +141,7 @@ class Oleada {
 	method recibirAtaque(alguien) {
 		self.esDaniadoCon(alguien.puntosDeAtaqueTotales())
 		if (!self.estaMuerto()) {
-			alguien.esDaniadoCon(self.puntosDeAtaqueTotales())
+			alguien.recibirAtaque(self)
 		}
 	}
 
