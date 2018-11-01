@@ -71,7 +71,7 @@ class Campeon {
 		 * Si el campeón tiene algún bloqueo, éste se reduce en una unidad.
 		 * Si no tiene, se suma el ataque de alguien al danioRecibido.
 		 */
-		if (cantBloqueos > 0) {
+		if (cantBloqueos > 0 && !alguien.estaMuerto()) {
 			cantBloqueos -= 1
 		} else {
 			danioRecibido += alguien.puntosDeAtaqueTotales()
@@ -127,10 +127,8 @@ class Oleada {
 	var property minions
 
 	method recibirAtaque(alguien) {
+		alguien.recibirAtaque(self)
 		self.esDaniadoCon(alguien.puntosDeAtaqueTotales())
-		if (!self.estaMuerto()) {
-			alguien.recibirAtaque(self)
-		}
 	}
 
 	method esDaniadoCon(cantidad) {
@@ -142,12 +140,15 @@ class Oleada {
 	}
 
 	method puntosDeAtaqueTotales() {
-		return minions + plus
+		return minions + self.puntosDeAtaqueExtra()
 	}
 
 	method puntosDeAtaqueExtra() {
-		// Habilidad que solo posee la Oleada y que consiste en un daño adicional.
-		return plus
+		if (!self.estaMuerto()) {
+			return plus
+		} else {
+			return 0
+		}
 	}
 
 }

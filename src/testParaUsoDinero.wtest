@@ -3,7 +3,7 @@ import items.*
 
 describe "test general" {
 
-	var goku = new Campeon(puntosDeAtaque = 15, puntosDeVida = 50, dinero = 1000)
+	var goku = new Campeon(puntosDeAtaque = 15, puntosDeVida = 70, dinero = 1000)
 	var anillo = new AnilloDeDoran()
 	var tomo = new TomoAmplificador()
 	var oleada = new Oleada(minions = 10, plus = 25)
@@ -27,21 +27,46 @@ describe "test general" {
 
 	test "Comportamiento de puntos de ataque y danioRecibido de goku segun ataques" {
 		assert.equals(15, goku.puntosDeAtaqueTotales())
-		assert.equals(50, goku.puntosDeVidaTotales())
+		assert.equals(70, goku.puntosDeVidaTotales())
 		assert.equals(75, oleada2.puntosDeAtaqueTotales())
 		assert.equals(0, goku.danioRecibido())
 		goku.comprar(anillo)
 		assert.equals(5, goku.danioRecibido())
 		assert.equals(30, goku.puntosDeAtaqueTotales())
-		assert.equals(110, goku.puntosDeVidaTotales())
+		assert.equals(130, goku.puntosDeVidaTotales())
 		goku.atacar(oleada2)
 		assert.equals(20, oleada2.minions())
-		assert.equals(50, goku.danioRecibido())
+		assert.equals(80, goku.danioRecibido())
+		goku.atacar(oleada2)
+		assert.equals(0, oleada2.minions())
+		assert.equals(125, goku.danioRecibido())
+		assert.notThat(goku.estaMuerto())
+		assert.that(oleada2.estaMuerto())
+		goku.atacar(oleada2)
+		assert.equals(125, goku.danioRecibido())		
+	}
+	
+	test "Comportamiento de puntos de ataque y danioRecibido de goku (con bloqueos) segun ataques" {
+		goku.cantBloqueos(1)
+		assert.equals(15, goku.puntosDeAtaqueTotales())
+		assert.equals(70, goku.puntosDeVidaTotales())
+		assert.equals(75, oleada2.puntosDeAtaqueTotales())
+		assert.equals(0, goku.danioRecibido())
+		goku.comprar(anillo)
+		assert.equals(5, goku.danioRecibido())
+		assert.equals(30, goku.puntosDeAtaqueTotales())
+		assert.equals(130, goku.puntosDeVidaTotales())
+		goku.atacar(oleada2)
+		assert.equals(20, oleada2.minions())
+		assert.equals(5, goku.danioRecibido())
+		assert.equals(0, goku.cantBloqueos())
 		goku.atacar(oleada2)
 		assert.equals(0, oleada2.minions())
 		assert.equals(50, goku.danioRecibido())
 		assert.notThat(goku.estaMuerto())
 		assert.that(oleada2.estaMuerto())
+		goku.atacar(oleada2)
+		assert.equals(50, goku.danioRecibido())		
 	}
 
 }
