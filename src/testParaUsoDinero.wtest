@@ -8,6 +8,7 @@ describe "test general" {
 	var tomo = new TomoAmplificador()
 	var oleada = new Oleada(minions = 10, plus = 25)
 	var oleada2 = new Oleada(minions = 50, plus = 25)
+	var pocion = new PocionDeVida()
 
 	// PRIMER TEST
 	test "Cambios en dinero de goku segun compras, ventas y ataques" {
@@ -67,6 +68,35 @@ describe "test general" {
 		assert.that(oleada2.estaMuerto())
 		goku.atacar(oleada2)
 		assert.equals(50, goku.danioRecibido())		
+	}
+	
+	test "Habilidad activable" {
+		goku.comprar(tomo)
+		goku.comprar(anillo)
+		assert.equals(200, goku.dinero())
+		goku.activarHabilidad(tomo)
+		assert.equals(500, goku.dinero())
+		goku.comprar(anillo)
+		assert.equals(200, goku.dinero())
+		goku.activarHabilidad(tomo)
+		assert.equals(200, goku.dinero())
+		/*
+		 * El dinero sigue siendo 200 porque solo puede ser usada una vez
+		 */
+		 goku.comprar(pocion)
+		 assert.equals(10, goku.danioRecibido())
+		 goku.esDaniadoCon(55)
+		 goku.activarHabilidad(pocion)
+		 assert.equals(15, goku.danioRecibido())
+		 goku.esDaniadoCon(35)
+		 goku.activarHabilidad(pocion)
+		 assert.equals(0, goku.danioRecibido())
+		 goku.esDaniadoCon(10)
+		 goku.activarHabilidad(pocion)
+		 assert.equals(10, goku.danioRecibido())
+		 /*
+		  * Ya utilizo los dos usos, por lo tanto no recupera mas danio
+		  */
 	}
 
 }
