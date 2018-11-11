@@ -117,6 +117,10 @@ class Campeon {
 	method puedeComprar(item) {
 		return dinero >= item.precio()
 	}
+	
+	method activarHabilidad(item) {
+		item.habilidadActivable(self)
+	}
 
 }
 

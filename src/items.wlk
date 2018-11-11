@@ -4,18 +4,26 @@ class Item {
 	 * Incluye los métodos principales que un ítem debe poseer.
 	 * (estos les asignaran sus propios valores de acuerdo a sus características).
 	 */
-	method puntosDeVidaQueOtorga(campeon)
+	method puntosDeVidaQueOtorga(campeon) {
+		return 0
+	}
 
-	method puntosDeAtaqueQueOtorga(campeon)
+	method puntosDeAtaqueQueOtorga(campeon) {
+		return 0
+	}
 
-	method equipar(campeon)
+	method equipar(campeon) {
+	}
 
-	method desequipar(campeon)
+	method desequipar(campeon) {
+	}
 
 	method habilidadActivable(campeon) {
 	}
 
-	method precio()
+	method precio() {
+		return 0
+	}
 
 }
 
@@ -143,3 +151,4 @@ class PocionDeVida inherits Item {
 	}
 
 }
+

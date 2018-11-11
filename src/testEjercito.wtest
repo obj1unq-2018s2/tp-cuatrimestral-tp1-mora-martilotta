@@ -1,0 +1,37 @@
+import ejercito.*
+import campeon.*
+
+describe "Test ejercito" {
+
+	var goku = new Campeon(puntosDeAtaque = 20, puntosDeVida = 50, dinero = 300)
+	var oleada1 = new Oleada(minions = 20, plus = 5)
+	var oleada2 = new Oleada(minions = 10, plus = 15)
+	var ejercito = new EjercitoDeMinions()
+
+	fixture {
+		ejercito.agregar(oleada1)
+		ejercito.agregar(oleada2)
+	}
+
+	test "Test del enunciado" {
+		goku.atacar(ejercito)
+		assert.that(goku.estaMuerto())
+		assert.that(ejercito.estaMuerto())
+	}
+
+	test "Test adicional" {
+		assert.equals(30, ejercito.minions())
+		goku.atacar(ejercito)
+		assert.equals(50, goku.danioRecibido())
+		assert.equals(0, oleada1.minions())
+		assert.equals(0, oleada2.minions())
+		assert.equals(320, goku.dinero())
+	/*
+	 * El campeon recibe 20 de dinero a pesar de que
+	 * la suma de los minions es 30 porque el ataque
+	 * que uso es de 20
+	 */
+	}
+
+}
+
