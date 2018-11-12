@@ -1,3 +1,5 @@
+// Parte individual: Andres Mora
+
 import campeon.*
 
 class Soporte inherits Campeon {

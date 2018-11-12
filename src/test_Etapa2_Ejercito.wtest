@@ -3,10 +3,10 @@ import campeon.*
 
 describe "Test ejercito" {
 
-	var goku = new Campeon(puntosDeAtaque = 20, puntosDeVida = 50, dinero = 300)
-	var oleada1 = new Oleada(minions = 20, plus = 5)
-	var oleada2 = new Oleada(minions = 10, plus = 15)
-	var ejercito = new EjercitoDeMinions()
+	const goku = new Campeon(puntosDeAtaque = 20, puntosDeVida = 50, dinero = 300)
+	const oleada1 = new Oleada(minions = 20, plus = 5)
+	const oleada2 = new Oleada(minions = 10, plus = 15)
+	const ejercito = new EjercitoDeMinions()
 
 	fixture {
 		ejercito.agregar(oleada1)

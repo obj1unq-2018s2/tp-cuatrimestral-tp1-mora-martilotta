@@ -3,12 +3,12 @@ import items.*
 
 describe "test general" {
 
-	var goku = new Campeon(puntosDeAtaque = 15, puntosDeVida = 70, dinero = 1000)
-	var anillo = new AnilloDeDoran()
-	var tomo = new TomoAmplificador()
-	var oleada = new Oleada(minions = 10, plus = 25)
-	var oleada2 = new Oleada(minions = 50, plus = 25)
-	var pocion = new PocionDeVida()
+	const goku = new Campeon(puntosDeAtaque = 15, puntosDeVida = 70, dinero = 1000)
+	const anillo = new AnilloDeDoran()
+	const tomo = new TomoAmplificador()
+	const oleada = new Oleada(minions = 10, plus = 25)
+	const oleada2 = new Oleada(minions = 50, plus = 25)
+	const pocion = new PocionDeVida()
 
 	// PRIMER TEST
 	test "Cambios en dinero de goku segun compras, ventas y ataques" {
@@ -97,6 +97,12 @@ describe "test general" {
 		 /*
 		  * Ya utilizo los dos usos, por lo tanto no recupera mas danio
 		  */
+	}
+	
+	test "El campeon no posee el item que quiere activar"{
+		goku.comprar(anillo)
+		assert.equals(200, goku.dinero())	
+		assert.throwsExceptionWithMessage("El campeón no posee este ítem!", {goku.activarHabilidad(tomo)})
 	}
 
 }
