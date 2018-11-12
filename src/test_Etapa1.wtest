@@ -3,7 +3,7 @@ import items.*
 
 describe "test general" {
 	
-	var goku   = new Campeon(puntosDeAtaque = 15, puntosDeVida = 50, dinero =0)
+	var goku   = new Campeon(puntosDeAtaque = 15, puntosDeVida = 50, dinero = 0)
 	var anillo = new AnilloDeDoran()
 	var tomo   = new TomoAmplificador()
 	var oleada = new Oleada(minions = 10, plus = 25)
