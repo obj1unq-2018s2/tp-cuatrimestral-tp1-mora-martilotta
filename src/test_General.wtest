@@ -1,0 +1,28 @@
+import campeon.*
+import items.*
+
+describe "test general" {
+	
+	const goku   = new Campeon(puntosDeAtaque = 15, puntosDeVida = 50, dinero = 0)
+	const anillo = new AnilloDeDoran()
+	const oleada = new Oleada(minions = 10, plus = 25)
+	const tomoMagiaBlanca  = new TomoAmplificador()
+	const tomoMagiaNegra   = new TomoAmplificador()
+
+	//PRIMER TEST
+	
+	test "Test del Enunciado: El campeón se equipa, ataca, y muere" {
+		goku.equiparseUn(anillo)
+		goku.equiparseUn(tomoMagiaBlanca)
+		goku.atacar(oleada)
+		assert.that(oleada.estaMuerto())
+		goku.atacar(oleada)
+		goku.atacar(oleada)
+		goku.desequiparseUn(anillo)
+		goku.desequiparseUn(tomoMagiaBlanca)
+		goku.equiparseUn(tomoMagiaNegra)	
+		goku.desequiparseUn(tomoMagiaNegra)	
+		assert.that(goku.estaMuerto())
+	}
+	
+}

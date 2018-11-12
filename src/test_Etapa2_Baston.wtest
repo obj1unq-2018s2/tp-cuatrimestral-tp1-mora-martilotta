@@ -1,5 +1,6 @@
 import campeon.*
 import items.*
+import baston.*
 
 
 describe "Testeando el Bastón del Vacío" {
@@ -11,43 +12,70 @@ describe "Testeando el Bastón del Vacío" {
 	const sombrero    = new SombreroDeRabadon()
 	const baston      = new Baston_Del_Vacio( materiales = [pocion, sombrero])
 	
-	test "El campeón se equipa los anillos" {
-	// Gandalf se equipa el anillo Alpha y el anillo Omega.
+	
+	test "Se crea un campeón con 15 PA, 50 PV y 800 de dinero"{
 		
-		gandalf.equiparseUn(anilloAlpha)
-		gandalf.equiparseUn(anilloOmega)
+		assert.equals(50, gandalf.puntosDeVidaTotales())
+		assert.equals(15, gandalf.puntosDeAtaqueTotales())
+		assert.equals(800, gandalf.dinero())
+	}
+	
+	
+	test "El campeón compra dos anillos y se los equipa" {
+	// Gandalf compra el anillo Alpha y el anillo Omega.
+		
+		gandalf.comprar(anilloAlpha)
+		gandalf.comprar(anilloOmega)
 		assert.that(gandalf.items().contains(anilloAlpha))
 		assert.that(gandalf.items().contains(anilloOmega))
 	}
 	
 
-	test "Al bastón se le añade una poción y un sombrero"{
+	test "El bastón tiene añadidos una poción y un sombrero"{
 		
-		baston.sumarItem(pocion)
-		baston.sumarItem(sombrero)
 		assert.that(baston.materialesActivos().contains(pocion))
 		assert.that(baston.materialesActivos().contains(sombrero))
 	}
 	
+	
 	test "El campeón se equipa el bastón del vacío"{
+	// Gandalf adquiere un bastón en el que ya vienen incluidos una poción y un sombrero de Rabadon.
 		
-		gandalf.equiparseUn(baston)
+		gandalf.comprar(baston)
 		assert.that(gandalf.items().contains(baston))
 	}
 	
+	
 	test "El campeón activa la habilidad del bastón" {
 		
-	/* 
-	 * Gandalf tiene 10 puntos de danioRecibido debido a que se equipo dos anillos.
-	 * Cuando se equipa el bastón y activa su habilidad, se recupera de todo este daño,
-	 * (gracias a que el bastón cuenta en su interior con un sombrero De Rabadon 
-	 * y hace uso de la habilidad activable de éste)
-	 */ 
-		gandalf.equiparseUn(anilloAlpha)
-		gandalf.equiparseUn(anilloOmega)
+		// Gandalf tiene 10 puntos de danioRecibido debido a que se equipo dos anillos de Doran.
+	
+		gandalf.comprar(anilloAlpha)
+		gandalf.comprar(anilloOmega)
 		assert.equals(10, gandalf.danioRecibido())
 		
-	  // Falta concluir.
+		// Se equipa el bastón y se cura el daño.
+		
+		gandalf.comprar(baston)
+		gandalf.activarHabilidad(baston)
+		assert.equals(0, gandalf.danioRecibido())
+	  
+	}
+	
+	test "El campeón se equipa el bastón y obtiene 500 de dinero" {
+		
+		// Gandalf adquiere dos anillos de Doran y su dinero se reduce a 200.
+		
+		gandalf.comprar(anilloAlpha)
+		gandalf.comprar(anilloOmega)
+		assert.equals(200, gandalf.dinero())
+		
+		// Gandalf compra un baston y activa su habilidad. 
+		// Como el bastón contiene un sombrero de Rabadon, se activa su habilidad y el dinero sube a 500.
+		
+		gandalf.comprar(baston)
+		gandalf.activarHabilidad(baston)
+		assert.equals(500, gandalf.dinero())
 	}
 	
 	

@@ -27,9 +27,13 @@ class Item {
 
 class AnilloDeDoran inherits Item {
 
-	override method puntosDeVidaQueOtorga(campeon) = 60
+	override method puntosDeVidaQueOtorga(campeon){
+		return 60
+	}
 
-	override method puntosDeAtaqueQueOtorga(campeon) = 15
+	override method puntosDeAtaqueQueOtorga(campeon){
+		return 15
+	}
 
 	override method equipar(campeon) {
 	// El campeón recibe 5 puntos de daño
@@ -141,9 +145,9 @@ class SombreroDeRabadon inherits TomoAmplificador {
 		return super() + 100
 	}
 	
-	override method habilidadActivable(campeon) {
+	//override method habilidadActivable(campeon) {
 	// El sombrero no posee habilidad activable.
-	}
+	//}
 }
 
 // PARTE 2: Nuevos Items.

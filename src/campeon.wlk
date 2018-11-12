@@ -119,7 +119,11 @@ class Campeon {
 	}
 	
 	method activarHabilidad(item) {
-		item.habilidadActivable(self)
+		if (items.contains(item)) {
+			item.habilidadActivable(self)
+		} else {
+			self.error("El campeón no posee este ítem!")
+		}
 	}
 
 }

@@ -11,9 +11,10 @@ class Baston_Del_Vacio inherits Item {
 		return materiales
 	}
 	
-	method sumarItem(item){
-	// Añade un material a la lista de materiales.
-	
+	method sumarItem(item, campeon){
+	// Añade un ítem del campeón a la lista de materiales. Al hacer esto, el campeón se desequipa el ítem.
+		
+		campeon.desequiparseUn(item)
 		materiales.add(item)
 	}
 			
@@ -32,7 +33,7 @@ class Baston_Del_Vacio inherits Item {
 	override method habilidadActivable(campeon){
 	// Activa la habilidad activable de cada ítem de los materiales.
 		
-		materiales.forEach {material => campeon.activarHabilidad(material)}
+		materiales.forEach {material => material.habilidadActivable(campeon)}
 	}
 }
 
