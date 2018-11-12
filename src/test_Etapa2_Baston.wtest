@@ -1,0 +1,67 @@
+import campeon.*
+import items.*
+
+
+describe "Testeando el Bastón del Vacío" {
+	
+	const gandalf = new Campeon( puntosDeVida = 50, puntosDeAtaque = 15, dinero = 800)
+	const anilloAlpha = new AnilloDeDoran()
+	const anilloOmega = new AnilloDeDoran()
+	const pocion      = new PocionDeVida()
+	const sombrero    = new SombreroDeRabadon()
+	const baston      = new Baston_Del_Vacio( materiales = [pocion, sombrero])
+	
+	test "El campeón se equipa los anillos" {
+	// Gandalf se equipa el anillo Alpha y el anillo Omega.
+		
+		gandalf.equiparseUn(anilloAlpha)
+		gandalf.equiparseUn(anilloOmega)
+		assert.that(gandalf.items().contains(anilloAlpha))
+		assert.that(gandalf.items().contains(anilloOmega))
+	}
+	
+
+	test "Al bastón se le añade una poción y un sombrero"{
+		
+		baston.sumarItem(pocion)
+		baston.sumarItem(sombrero)
+		assert.that(baston.materialesActivos().contains(pocion))
+		assert.that(baston.materialesActivos().contains(sombrero))
+	}
+	
+	test "El campeón se equipa el bastón del vacío"{
+		
+		gandalf.equiparseUn(baston)
+		assert.that(gandalf.items().contains(baston))
+	}
+	
+	test "El campeón activa la habilidad del bastón" {
+		
+	/* 
+	 * Gandalf tiene 10 puntos de danioRecibido debido a que se equipo dos anillos.
+	 * Cuando se equipa el bastón y activa su habilidad, se recupera de todo este daño,
+	 * (gracias a que el bastón cuenta en su interior con un sombrero De Rabadon 
+	 * y hace uso de la habilidad activable de éste)
+	 */ 
+		gandalf.equiparseUn(anilloAlpha)
+		gandalf.equiparseUn(anilloOmega)
+		assert.equals(10, gandalf.danioRecibido())
+		
+	  // Falta concluir.
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}

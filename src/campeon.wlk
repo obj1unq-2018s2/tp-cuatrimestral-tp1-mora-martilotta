@@ -1,9 +1,9 @@
 class Campeon {
 
 	const property puntosDeAtaque = 0
-	const property puntosDeVida = 0
-	var   property danioRecibido = 0
-	var   property cantBloqueos = 0
+	const property puntosDeVida   = 0
+	var   property danioRecibido  = 0
+	var   property cantBloqueos   = 0
 	const property items = []
 	var   property dinero = 0
 
