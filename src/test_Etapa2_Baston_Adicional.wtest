@@ -14,13 +14,17 @@ describe "Test adicionales"{
 	const pocion  = new PocionDeVida()
 	const oleada  = new Oleada(minions = 10, plus = 20)
 	const oleada2 = new Oleada(minions = 15, plus = 15)
-	const bastonDelBrujo = new Baston_Del_Vacio( materiales = [pocion, pocionConcentrada, libroHechizos])
+	const bastonDelBrujo = new Baston_Del_Vacio()
 	
 	
 	
 	test "El campeón se equipa un bastón con una pocion y recupera vida"{
 		
+		gandalf.comprar(pocion)
+		gandalf.comprar(pocionConcentrada)
 		gandalf.comprar(bastonDelBrujo)
+		bastonDelBrujo.sumarItem(pocion, gandalf)
+		bastonDelBrujo.sumarItem(pocionConcentrada, gandalf)
 		gandalf.atacar(oleada)
 		gandalf.atacar(oleada2)
 		gandalf.activarHabilidad(bastonDelBrujo)
@@ -29,10 +33,12 @@ describe "Test adicionales"{
 	}
 	
 	test "El campeon se equipa un bastón con un libro de hechizos y no recibe efectos"{
-			
+		
+		gandalf.comprar(libroHechizos)	
 		gandalf.comprar(bastonDelBrujo)
+		bastonDelBrujo.sumarItem(libroHechizos, gandalf)
 		gandalf.activarHabilidad(bastonDelBrujo)
-		assert.equals(1000, gandalf.dinero())
+		assert.equals(500, gandalf.dinero())
 		
 	
 	}
