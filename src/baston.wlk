@@ -1,3 +1,5 @@
+// Parte individual: Damián Martilotta.
+
 import items.*
 
 class Baston_Del_Vacio inherits Item {
