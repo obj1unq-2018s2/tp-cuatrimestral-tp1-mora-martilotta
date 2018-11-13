@@ -122,7 +122,7 @@ class Campeon {
 		if (items.contains(item)) {
 			item.habilidadActivable(self)
 		} else {
-			self.error("El campeón no posee este ítem!")
+			self.error("El personaje no posee este ítem!")
 		}
 	}
 
