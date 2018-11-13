@@ -1,7 +1,7 @@
 import campeon.*
 import items.*
 
-describe "test general" {
+describe "Test etapa 2" {
 	
 	const goku   = new Campeon(puntosDeAtaque = 15, puntosDeVida = 50, dinero = 0)
 	const anillo = new AnilloDeDoran()
