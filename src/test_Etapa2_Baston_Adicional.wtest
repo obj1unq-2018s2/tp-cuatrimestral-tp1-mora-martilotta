@@ -1,0 +1,40 @@
+// Tests adicionales del Bastón del Vacío. Damián Martilotta
+
+import campeon.*
+import items.*
+import baston.*
+
+
+describe "Test adicionales"{
+	
+	
+	const pocionConcentrada = new PocionDeVida()
+	const libroHechizos = new TomoAmplificador()
+	const gandalf = new Campeon ( puntosDeVida = 50, puntosDeAtaque = 20, dinero = 1000)
+	const pocion  = new PocionDeVida()
+	const oleada  = new Oleada(minions = 10, plus = 20)
+	const oleada2 = new Oleada(minions = 15, plus = 15)
+	const bastonDelBrujo = new Baston_Del_Vacio( materiales = [pocion, pocionConcentrada, libroHechizos])
+	
+	
+	
+	test "El campeón se equipa un bastón con una pocion y recupera vida"{
+		
+		gandalf.comprar(bastonDelBrujo)
+		gandalf.atacar(oleada)
+		gandalf.atacar(oleada2)
+		gandalf.activarHabilidad(bastonDelBrujo)
+		assert.equals(0, gandalf.danioRecibido())
+		
+	}
+	
+	test "El campeon se equipa un bastón con un libro de hechizos y no recibe efectos"{
+			
+		gandalf.comprar(bastonDelBrujo)
+		gandalf.activarHabilidad(bastonDelBrujo)
+		assert.equals(1000, gandalf.dinero())
+		
+	
+	}
+	
+}

@@ -14,7 +14,7 @@ describe "Testeando el Bastón del Vacío" {
 	const sombrero    = new SombreroDeRabadon()
 	const baston      = new Baston_Del_Vacio( materiales = [pocion, sombrero])
 	
-	
+
 	test "Se crea un campeón con 15 PA, 50 PV y 800 de dinero"{
 		
 		assert.equals(50, gandalf.puntosDeVidaTotales())
@@ -80,18 +80,10 @@ describe "Testeando el Bastón del Vacío" {
 		assert.equals(500, gandalf.dinero())
 	}
 	
+
 	
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		
 }

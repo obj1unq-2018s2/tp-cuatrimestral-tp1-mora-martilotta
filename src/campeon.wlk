@@ -131,8 +131,8 @@ class Campeon {
 class Oleada {
 
 	// Se crea una oleada de enemigos cuyo propósito es atacar al campeón.
-	var property plus = null // Es un número.
-	var property minions
+	const property plus = 0
+	var property minions 
 
 	method recibirAtaque(alguien) {
 		alguien.recibirAtaque(self)

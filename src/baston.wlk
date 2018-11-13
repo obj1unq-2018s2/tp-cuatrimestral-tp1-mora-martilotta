@@ -23,13 +23,13 @@ class Baston_Del_Vacio inherits Item {
 	override method puntosDeVidaQueOtorga(campeon){
 	// Aporta la mitad de los puntos de vida que otorga cada elemento de los materiales.
 		
-		return materiales.sum {material => material.puntosDeVidaQueOtorga()} / 2
+		return materiales.sum {material => material.puntosDeVidaQueOtorga(campeon)} / 2
 	}
 	
 	override method puntosDeAtaqueQueOtorga(campeon){
 	// Aporta el total de los puntos de ataque que otorga cada elemento de los materiales.
 	
-		return materiales.sum {material => material.puntosDeAtaqueQueOtorga()}
+		return materiales.sum {material => material.puntosDeAtaqueQueOtorga(campeon)}
 	}
 	
 	override method habilidadActivable(campeon){
